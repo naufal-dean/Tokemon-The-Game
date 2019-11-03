@@ -1,0 +1,15 @@
+Available commands:
+    start. -- start the game!
+    help. -- show available commands
+    quit. -- quit the game
+    n. s. e. w. -- move
+    map.-- look at the map
+    heal -- cure Tokemon in inventory if in gym center
+    status. -- show your status'), nl.
+    save(Filename). -- save your game
+    load(Filename). -- load previously saved game
+
+Legends:
+    - X = Pagar
+    - P = Player
+    - G = Gym

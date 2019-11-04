@@ -1,10 +1,8 @@
 :- dynamic(gameStarted/1).
 
+:- include(initgame).
 :- include(util).
-
-% daftar command yang valid
-command(start).
-command(quit).
+:- include(map).
 
 % init game
 :- initialization(nl).
@@ -14,13 +12,13 @@ command(quit).
 gameStarted(no).
 
 start :-
-	gameStarted(yes),
-	write('Ongoing game detected, type "quit." to restart current game.'), nl,
-	!.
+    gameStarted(yes),
+    ongoingGameMsg,
+    !.
 
 start :-
-	gameStarted(no),
-	retract(gameStarted(no)),
+    gameStarted(no),
+    retract(gameStarted(no)),
     asserta(gameStarted(yes)),
     write('Game started!'), nl,
     welcomeMsg,
@@ -31,13 +29,13 @@ start :-
     Input = quit.
 
 quit :-
-	gameStarted(no),
-	write('No ongoing game detected. type "start." to start the game.'), nl,
-	!.
+    gameStarted(no),
+    notStartedMsg,
+    !.
 
 quit :-
-	gameStarted(yes),
-	retract(gameStarted(yes)),
+    gameStarted(yes),
+    retract(gameStarted(yes)),
     asserta(gameStarted(no)),
     write('Quitting game..'), nl,
     !.

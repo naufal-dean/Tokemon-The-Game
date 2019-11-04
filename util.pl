@@ -32,3 +32,9 @@ welcomeMsg :-
 
 help :-
 	read_file('data/help.txt').
+
+notStartedMsg :-
+  read_file('data/notStartedMsg.txt').
+
+ongoingGameMsg :-
+  read_file('data/ongoingGameMsg.txt').

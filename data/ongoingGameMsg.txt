@@ -1,0 +1,1 @@
+Ongoing game detected, type "quit." to restart current game.

@@ -7,24 +7,23 @@ do(X) :-
 	X.
 
 % read/write file
-write_file(FilePath, Text) :-
+writeFile(FilePath, Text) :-
   open(FilePath, write, Stream),
   write(Stream, Text), nl,
   close(Stream).
 
-read_file(FilePath) :-
+readFile(FilePath) :-
   open(FilePath, read, Stream),
   get_char(Stream, Char),
-  print_stream(Char, Stream),
+  printStream(Char, Stream),
   close(Stream).
 
-print_stream(end_of_file, _) :-
+printStream(end_of_file, _) :-
   !.
-
-print_stream(Char, Stream) :-
+printStream(Char, Stream) :-
   write(Char),
   get_char(Stream, Char2),
-  print_stream(Char2, Stream).
+  printStream(Char2, Stream).
 
 % banner
 welcomeMsg :-

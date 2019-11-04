@@ -1,40 +1,27 @@
-:- dynamic(gameStarted/1).
+:- dynamic(gameStarted/1, at/3).
 
 :- include(initgame).
 :- include(util).
 :- include(map).
+:- include(move).
 
 % init game
-:- initialization(nl).
-:- initialization(write('Type "start." to start the game!')).
-:- initialization(nl).
+:- initialization(startGameMsg).
 
 gameStarted(no).
 
 start :-
-    gameStarted(yes),
-    ongoingGameMsg,
-    !.
-
-start :-
-    gameStarted(no),
     retract(gameStarted(no)),
     asserta(gameStarted(yes)),
-    write('Game started!'), nl,
     welcomeMsg,
     help,
     repeat,
-    read(Input),
-    do(Input),
+        read(Input),
+        do(Input),
     Input = quit.
 
+quit :- checkStart, !.
 quit :-
-    gameStarted(no),
-    notStartedMsg,
-    !.
-
-quit :-
-    gameStarted(yes),
     retract(gameStarted(yes)),
     asserta(gameStarted(no)),
     write('Quitting game..'), nl,

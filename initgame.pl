@@ -1,6 +1,11 @@
 % daftar command yang valid
 command(start).
 command(quit).
+command(map).
+command(n).
+command(e).
+command(w).
+command(s).
 
 % ================= MAP =================
 mapSize(10, 10).

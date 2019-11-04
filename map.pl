@@ -1,13 +1,10 @@
-map :-
-	gameStarted(no),
-	notStartedMsg,
-	!.
-
+map :- checkStart, !.
 map :-
 	showMap(0, 0),
 	nl.
 
 % kanan bawah, basis
+showMap(_,_) :- checkStart, !.
 showMap(R, C) :-
 	mapSize(Row, Col),
 	C > Col,
@@ -30,7 +27,7 @@ showMap(0, C) :-
 	showMap(0, CNext).
 % tembok bawah, bukan plg kanan
 showMap(R, C) :-
-	mapSize(Row, Col),
+	mapSize(Row, _),
 	R > Row,
 	write('X'),
 	succ(C, CNext),
@@ -55,6 +52,7 @@ showMap(R, C) :-
 	!,
 	showMap(R, CNext).
 
+showOneTile(_) :- checkStart, !.
 showOneTile(pagar) :-
 	write('X').
 showOneTile(player) :-

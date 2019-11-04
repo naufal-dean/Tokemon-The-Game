@@ -1,0 +1,116 @@
+﻿DELIVERABLES I TUGAS BESAR LOGIKA KOMPUTASIONAL
+Kelompok 05 / K-3
+Ahadi Ihsan Rasyidin / 13518006
+Anna Elvira Hartoyo / 13518045
+Jonathan Yudi Gunawan / 13518084
+Naufal Dean Anugrah / 13518123
+
+
+
+
+Gambaran umum cerita permainan:
+The Adventure of Tokemon
+
+
+Game ini menceritakan tentang perjalanan seorang anak dengan tokemon kesayangannya. Di awal permainan kita akan memberi nama player yang akan dimainkan. Sebagai bekal awal petualangan player akan ditemani satu tokemon normal dengan tipe tertentu dan nilai health yang masih penuh. Player harus berkelana mengelilingi dunia untuk mencari tokemon terkuat dan berkembang untuk mengalahkan tokemon lain.
+
+
+Player dapat mengeksplorasi area pada map dengan menggunakan perintah n, w, e, s,.  Terdapat beberapa rintangan atau batasan dalam pergerakkan, seperti pagar dan rintangan lainnya.
+
+
+Dalam perjalanannya menjelajahi map, player akan bertemu berbagai tokemon dari tipe leaves sampai light, baik normal maupun legendary tokemon. Tokemon lawan tersebut muncul secara acak di posisi tertentu pada map. (Peluang bertemu dengan legendary tokemon lebih kecil daripada bertemu normal tokemon). Ketika hal itu terjadi player memiliki dua pilihan yaitu melawan tokemon yang dia temui dengan tokemon miliknya atau lari dengan berpindah posisi.
+
+
+Jika pemain memilih untuk melakukan battle dengan tokemon yang ditemuinya, maka battle akan berlangsung hingga salah satu dari Tokemon tersebut kalah. Player dapat melakukan attack 
+
+
+Selama permainan pemain hanya diperkenankan memiliki enam tokemon dalam inventori yang dimilikinya. Ketika inventori penuh dan pemain ingin menangkap tokemon lain maka pemain harus membuang satu tokemon di inventorinya terlebih dahulu. Jumlah tokeball yang dapat digunakan pemain tidak terbatas.
+
+
+Dalam perjalanannya pemain akan menemukan gym center, tempat dimana pemain dapat menyembuhkan luka dari tokemon miliknya. Selama pertarungan tokemon player dapat mengalami kenaikan level. Pada kondisi tertentu tokemon milik player dapat di evolve.
+
+
+Eksplorasi map, dan battle akan terus dilakukan hingga salah satu dari kondisi menang atau kalah terpenuhi.
+
+
+Player akan menang jika sudah berhasil mengalahkan semua legendary tokemon yang ada pada permainan ini. Sedangkan pemain dikatakan kalah ketika seluruh Tokemon pada inventorinya sudah mati dalam battle dengan tokemon lain.
+
+
+
+
+
+
+
+
+
+
+
+
+________________
+
+
+Modularitas
+main.pl
+* gameStarted/1 : bool apakah game sudah dimulai/belum
+* start/0 : main loop
+* quit/0 :
+* command/1 (nama command) : daftar command yang valid apa aja
+
+
+newgame.pl
+* ukuran map, barang2 yg di map{
+posisi tokemon, gym, player, dll (awalnya)
+          }
+* pos/2 (X, Y) : posisi player saat ini
+
+
+util.pl
+* welcomeMsg/0
+* help/0 : instruksi2 dalam game
+* do/1 (user input)  : validasi input, pakai command/1, jika tidak valid tuliskan “command tidak valid”
+* kondisi kalah (tokemon habis) dan menang (semua legend tokemon dikalahkan)
+
+
+inven.pl
+* drop/1 (nama tokemon) : hapus tokemon dari inventori, keluar tulisan “you have dropped <nama tokemon>”
+* inven/1 (list tokemon yg dimiliki pemain. --di awal permainan setiap pemain punya satu tokemon normal. --maksimal tokemon yang dapat di list adalah 6. --jika jumlah tomemon yang dimiliki sudah 6 dan bermaksud untuk menangkap lagi maka pemain harus mendrop tokemon yang dimilikinya dulu.) 
+* showInven/1 (list tokemon) : menampilkan tokemon (dan statusnya) ke layar (pakai tokemon/5)
+* delTokemon/3 (nama toke, list lama, list baru) : menghapus tokemon dari inventory
+* status/0: menampilkan status (nama, health, dan tipe) (pakai inven/1) dari tokemon di inventori dan semua tokemon yang masih harus dikalahkan.
+
+
+move.pl
+* w,a,s,d/0 : berpindah, jgn lupa cek melebihi map/tidak.
+
+
+map.pl
+* map/0 : menampilkan map. 
+* showMap/2 (row, col) : menampilkan map
+* showOneTile/1 (item) : menampilkan bila ada benda di situ 
+
+
+battle.pl
+* onBattle/1 : boolean sedang battle/tidak
+* pick/1 (nama) : pilih tokemon, cek di inventori ada tokemon yang dipilih atau tidak. Jika tidak ada, dtiampilkan “You don’t have that Tokemon!”, lalu player harus memilih (pick) tokemon lagi yang ada diinventori. Jika tokemon yang dipilih ada di inventori, ditrampilkan “You : “<nama tokemon> I choose you!” lalu battle berlanjut.
+* attack/0 : ada modifier 50% sesuai tipe tokemonnya
+* specialAttack/0
+* run/0 : lari untuk menghindari battle, ada chance gagal (pakai random/3). Jika sukses untuk lari, akan ditampilkan “You sucessfully escaped the Tokemon!”, jika gagal, akan ditampilkan “You failed to run!” lalu dimulailah battle.
+* capture/0 : ketika Tokemon lawan sudah kalah, pemain ditawarkan untuk melakukan capture tokemon tersebut. Jika ya, tokemon di inventori akan bertambah, tapi harus cek dulu di inventori sudah ada 6 tokemon atau belum.
+
+
+________________
+
+
+saveload.pl
+* save/1 (nama file)
+* load/1 (nama file)
+
+
+tokemon.pl
+* tokemon/5 (nama, health, tipe, normal attack, special attack) : cek status tokemon
+* heal/0 : heal semua tokemon di inventory, syaratnya tokemon harus ada di gym centre, cek posisi player.
+
+
+initgame.pl
+* at/3 : (item, X, Y) : item berada di X,Y
+* mapSize/2 (row, col) : ukuran map

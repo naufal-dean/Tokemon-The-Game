@@ -27,13 +27,13 @@ printStream(Char, Stream) :-
 
 % banner
 welcomeMsg :-
-	read_file('data/welcomeMsg.txt').
+	readFile('data/welcomeMsg.txt').
 
 help :-
-	read_file('data/help.txt').
+	readFile('data/help.txt').
 
 notStartedMsg :-
-  read_file('data/notStartedMsg.txt').
+  readFile('data/notStartedMsg.txt').
 
 ongoingGameMsg :-
-  read_file('data/ongoingGameMsg.txt').
+  readFile('data/ongoingGameMsg.txt').

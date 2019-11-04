@@ -17,6 +17,9 @@ checkStart :-
   gameStarted(no),
   notStartedMsg.
 
+isEmpty([], true).
+isEmpty([_|_], false).
+
 % =================== read/write file ===================
 writeFile(_,_) :- checkStart, !.
 writeFile(FilePath, Text) :-

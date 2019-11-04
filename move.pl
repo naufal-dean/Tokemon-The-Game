@@ -15,7 +15,7 @@ movePlayer(DeltaR, DeltaC) :-
 moveTo(_,_) :- checkStart, !.
 moveTo(RDest, CDest) :-
 	mapSize(Row, Col),
-	(RDest =< 1 ; RDest >= Row ; CDest =< 1; CDest >= Col; at(pagar, RDest, CDest)),
+	(RDest < 1 ; RDest > Row ; CDest < 1; CDest > Col; at(pagar, RDest, CDest)),
 	invalidMoveMsg,
 	!.
 moveTo(RDest, CDest) :-

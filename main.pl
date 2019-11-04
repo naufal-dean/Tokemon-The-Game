@@ -1,4 +1,4 @@
-:- dynamic(gameStarted/1, at/3).
+:- dynamic(gameStarted/1, at/3, enemy/1, myToke/1, playerName/1, tokemonCount/1).
 
 :- include(initgame).
 :- include(util).
@@ -6,6 +6,8 @@
 :- include(move).
 :- include(player).
 :- include(tokemon).
+:- include(inven).
+:- include(battle).
 
 % init game
 :- initialization(startGameMsg).
@@ -29,5 +31,5 @@ quit :- checkStart, !.
 quit :-
     retract(gameStarted(yes)),
     asserta(gameStarted(no)),
-    write('Quitting game..'), nl,
-    !.
+    load_internal('initgame.pl'),
+    abort.

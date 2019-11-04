@@ -42,6 +42,17 @@ printStream(Char, Stream) :-
   get_char(Stream, Char2),
   printStream(Char2, Stream).
 
+load_internal(FileName) :-
+  retractall(at(_,_,_)),
+  retract(i_am_at(_,_)),
+  retractall(alive(_,_,_,_)),
+  retract(player(_,_,_)),
+  retract(playerInventory(_)),
+  retractall(playerWeapon(_)),
+  open(FileName, read, Stream),
+  readfile(Stream, _),
+  close(Stream).
+
 % ===================== Messages =====================
 % core
 welcomeMsg :-
@@ -61,6 +72,12 @@ startGameMsg :-
 
 invalidInputMsg :-
   readFile('data/core/invalidInputMsg.txt').
+
+loseMsg :-
+  readFile('data/core/failMsg.txt').
+
+winMsg :-
+  readFile('data/core/winMsg.txt').
 
 % move
 invalidMoveMsg :-
@@ -86,5 +103,5 @@ moveMsg(DeltaR, DeltaC) :-
   DeltaC < 0,
   readFile('data/move/west.txt'),
   !.
-moveMsg(_, _) :-
+moveMsg(_,_) :-
   readFile('data/move/cheat.txt').

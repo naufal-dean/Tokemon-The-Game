@@ -1,1 +1,1 @@
-Input is not valid!
+Invalid input! Try 'help.'!

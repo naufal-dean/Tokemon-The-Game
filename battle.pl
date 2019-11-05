@@ -11,7 +11,7 @@ initBattle(Enemy) :-
 	retract(encounter(no)),
 	asserta(encounter(yes)),
 	retractall(enemyToke(_,_,_,_,_,_,_,_)),
-	tokemon(Enemy,HP,Type,Damage,Skill,SkillDmg,Exp,Level),
+	tokeData(Enemy,HP,Type,Damage,Skill,SkillDmg,Exp,Level),
 	asserta(enemyToke(Enemy,HP,Type,Damage,Skill,SkillDmg,Exp,Level)),
 	format('A wild Tokemon appears! It is ~a...\nFight or Run?\n', [Enemy]).
 
@@ -55,7 +55,6 @@ enemyTurn :-
 
 fight :- checkStart, !.
 fight :- checkBattle(no), !.
-fight :- checkEncounter, !.
 fight :-
 	retract(encounter(yes)),
 	asserta(encounter(no)),
@@ -109,7 +108,7 @@ capture :-
 			Cond is notCaptured,
 			write('Please enter unique name!')
 		)),
-	Cond = captured(Nick, Enemy).
+	Cond = captured(Nick, Enemy),
 	endBattle,
 	!.
 capture :-

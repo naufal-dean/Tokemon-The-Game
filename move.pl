@@ -30,7 +30,6 @@ moveTo(RDest, CDest) :-
 	retract(moves(MoveCnt)),
 	MoveCntPlus is MoveCnt+1,
 	asserta(moves(MoveCntPlus)),
-	
 	calcChance(Chance),
 	triggerEnemy(Chance).
 
@@ -38,9 +37,9 @@ moveTo(RDest, CDest) :-
 calcChance(_) :- checkStart, !.
 calcChance(Chance) :-
 	Base is 1001,
-	moves(MoveCnt//10),
+	moves(MoveCnt),
 	countToke(TokeCnt),
-	ChanceCap is Base + MoveCnt + TokeCnt*10,
+	ChanceCap is Base + MoveCnt//10 + TokeCnt*10,
 	random(1, ChanceCap, Chance).
 
 % Chance : random (1-1000) + (10-60) + 1-..(500?)
@@ -49,15 +48,41 @@ calcChance(Chance) :-
 % 1000 moves & 6 toke : +- 15%
 triggerEnemy(_) :- checkStart, !.
 triggerEnemy(Chance) :-
-	Chance < 800.
+	Chance < 800,
+	!.
 triggerEnemy(Chance) :-
 	Chance < 950,
-	random(1, 6, X),
-	switch(X, [
-		1: Enemy is 'Insectmon',
-		2: Enemy is 'Waterlemon',
-		3: Enemy is 'Chillmon',
-		4: Enemy is 'Phillipmon',
-		5: Enemy is 'Gelapmon'
-	]),
-	initBattle(Enemy).
+	
+	getLandType(LandType),
+	enemiesOn(LandType, Enemies),
+	countFromList(Enemies, NBElements),
+	
+	random(0, NBElements, X), Idx is X-1,
+	nth(Idx, Enemies, Encounter),
+	initBattle(Encounter),
+	!.
+triggerEnemy(_) :-
+	enemy(Enemy),
+	countEnemy(LegendCnt),
+	random(0, LegendCnt, X),
+	Idx is X+1,
+	nth(Idx, Enemy, Encounter),
+	initBattle(Encounter).
+
+% if on water, return water-type pokemons... etc
+enemiesOn(_,_) :- checkStart, !.
+enemiesOn(water, Enemies) :-
+	waterEnemies(Enemies),
+	!.
+enemiesOn(grass, Enemies) :-
+	grassEnemies(Enemies),
+	!.
+enemiesOn(_, Enemies) :-
+	dirtEnemies(Enemies).
+
+
+getLandType(_) :- checkStart, !.
+getLandType(LandType) :-
+	at(player, R, C),
+	at(LandType, R, C),
+	LandType \== player.

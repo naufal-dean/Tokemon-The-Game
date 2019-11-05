@@ -22,7 +22,7 @@ isEmpty([_|_], false).
 
 % Fungsi Lain
 switch(X, [Val:Goal|Cases]) :-
-    ( X=Val ->
+    ( X is Val ->
         call(Goal)
     ;
         switch(X, Cases)

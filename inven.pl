@@ -51,6 +51,11 @@ countToke(N) :-
 	myToke(MyToke),
 	countFromList(MyToke, N).
 
+countEnemy(_) :- checkStart, !.
+countEnemy(N) :-
+	enemy(Enemy),
+	countFromList(Enemy, N).
+
 countFromList(_,_) :- checkStart, !.
 countFromList([], 0).
 countFromList([_|T], N) :-

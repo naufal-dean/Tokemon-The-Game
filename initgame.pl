@@ -9,6 +9,12 @@ command(w).
 command(s).
 command(status).
 command(drop(_)).
+command(fight).
+command(run).
+command(attack).
+command(specialAttack).
+command(capture).
+command(pick(_)).
 
 % ================= MAP =================
 mapSize(10, 10).

@@ -15,6 +15,9 @@ tokeData('Waterlemon',30,water,4,'sweet seed',8,0,1).
 tokeData('Chillmon',20,fire,6,'warm candy',12,0,1).
 tokeData('Phillipmon',22,light,4,'white lamp',17,0,1).
 tokeData('Gelapmon',24,dark,3,'electric die',18,0,1).
+grassEnemies(['Insectmon', 'Gelapmon']).
+dirtEnemies(['Insectmon', 'Gelapmon', 'Phillipmon', 'Chillmon']).
+waterEnemies(['Waterlemon', 'Phillipmon']).
 
 % owned tokemon
 % format: tokemon(id,nama_tokemon,hp,tipe,attack,skill,skill_damage,exp,level)

@@ -71,14 +71,18 @@ invalidInputMsg :-
   readFile('data/core/invalidInputMsg.txt').
 
 loseMsg :-
-  readFile('data/core/failMsg.txt').
+  readFile('data/core/loseMsg.txt').
 
 winMsg :-
   readFile('data/core/winMsg.txt').
 
 quitGameMsg :-
   readFile('data/core/quitGameMsg.txt').
-  
+
+noTokemonMsg :-
+  readFile('data/tokemon/noTokemonMsg.txt').
+
+
 % move
 invalidMoveMsg :-
   readFile('data/move/invalid.txt'),

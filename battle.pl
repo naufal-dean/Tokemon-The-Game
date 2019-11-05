@@ -102,10 +102,22 @@ capture :- checkActiveToke, !.
 capture :-
 	enemyToke(Enemy,EnemyHP,_,_,_,_,_,_),
 	EnemyHP =< 0,
-	tokemon(Enemy,HP,Type,Damage,Skill,SkillDmg,Exp,Level),
-
-	format('~a is captured!\n', [Enemy]),
+	repeat,
+		write('Name your new tokemon: '),
+		read(Nick),
+		uniqueNick(Nick) -> (
+			enemyToke(Enemy),
+			Cond is captured(Nick, Enemy)
+		) ; (
+			Cond is notCaptured,
+			write('Please enter unique name!')
+		),
+	Cond = captured(Nick, Enemy).
 	endBattle.
 capture :-
 	enemyToke(Enemy,_,_,_,_,_,_,_),
 	write('~a is not defeated yet!', [Enemy]).
+
+captured(Nick, Enemy) :-
+	addTokemon(Nick, Enemy),
+	format('~a is captured!\n', [Nick]).

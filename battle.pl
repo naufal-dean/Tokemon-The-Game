@@ -48,14 +48,14 @@ checkActiveToke :-
 	activeToke(none),
 	write('You must Pick a Tokemon first!\n').
 
-enemyDefeated :- checkStart, !.
-enemyDefeated :-
-	write('Enemy\'s turn...'),
-	!.
-enemyDefeated :-
+enemyTurn :- checkStart, !.
+enemyTurn :-
 	enemyToke(Enemy,HP,_,_,_,_,_,_),
 	HP =< 0,
-	format('You defeated ~a..\nCapture or Move around to end the battle?\n', [Enemy]).
+	format('You defeated ~a..\nCapture or Move around to end the battle?\n', [Enemy]),
+	!.
+enemyTurn :-
+	write('Enemy\'s turn...').
 
 fight :- checkStart, !.
 fight :- checkBattle(no), !.
@@ -94,7 +94,8 @@ attack :-
 	NewHP is HP - Att,
 	asserta(enemyToke(Enemy,NewHP,Type,Damage,Skill,SkillDmg,Exp,Level)),
 	format('~a attack!\n', [Toke]),
-	format('~a deals ~w damage to ~a', [Toke, Att, Enemy]).
+	format('~a deals ~w damage to ~a', [Toke, Att, Enemy]),
+	enemyTurn.
 
 capture :- checkStart, !.
 capture :- checkBattle(no), !.
@@ -105,15 +106,16 @@ capture :-
 	repeat,
 		write('Name your new tokemon: '),
 		read(Nick),
-		uniqueNick(Nick) -> (
+		(uniqueNick(Nick) -> (
 			enemyToke(Enemy),
 			Cond is captured(Nick, Enemy)
 		) ; (
 			Cond is notCaptured,
 			write('Please enter unique name!')
-		),
+		)),
 	Cond = captured(Nick, Enemy).
-	endBattle.
+	endBattle,
+	!.
 capture :-
 	enemyToke(Enemy,_,_,_,_,_,_,_),
 	write('~a is not defeated yet!', [Enemy]).

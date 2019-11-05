@@ -29,6 +29,7 @@ start :-
 
 quit :- checkStart, !.
 quit :-
+    quitGameMsg,
     retract(gameStarted(yes)),
     asserta(gameStarted(no)),
     load_internal('initgame.pl'),

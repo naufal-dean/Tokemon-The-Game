@@ -21,20 +21,17 @@ isEmpty([], true).
 isEmpty([_|_], false).
 
 % =================== read/write file ===================
-writeFile(_,_) :- checkStart, !.
 writeFile(FilePath, Text) :-
   open(FilePath, write, Stream),
   write(Stream, Text), nl,
   close(Stream).
 
-readFile(_,_) :- checkStart, !.
 readFile(FilePath) :-
   open(FilePath, read, Stream),
   get_char(Stream, Char),
   printStream(Char, Stream),
   close(Stream).
 
-printStream(_,_) :- checkStart, !.
 printStream(end_of_file, _) :-
   !.
 printStream(Char, Stream) :-
@@ -79,6 +76,9 @@ loseMsg :-
 winMsg :-
   readFile('data/core/winMsg.txt').
 
+quitGameMsg :-
+  readFile('data/core/quitGameMsg.txt').
+  
 % move
 invalidMoveMsg :-
   readFile('data/move/invalid.txt'),

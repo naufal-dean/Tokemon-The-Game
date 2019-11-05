@@ -1,7 +1,3 @@
-:- dynamic(battleStarted/1, encounter/1, activeToke/1, enemyToke/8).
-
-:- include(tokemon).
-
 battleStarted(no).
 encounter(no).
 activeToke(none).

@@ -68,6 +68,10 @@ fight :-
 run :- checkStart, !.
 run :- checkBattle(no), !.
 run :-
+	enemyToke(Enemy,EnemyHP,_,_,_,_,_,_),
+	EnemyHP =< 0,
+	format('~a is defeated...\nCapture it or move to end the battle...\n', [Enemy]).
+run :-
 	retractall(encounter(_)),
 	asserta(encounter(no)),
 	endBattle.
@@ -75,6 +79,10 @@ run :-
 pick(_) :- checkStart, !.
 pick(_) :- checkBattle(no), !.
 pick(_) :- checkEncounter, !.
+pick(_) :-
+	enemyToke(Enemy,EnemyHP,_,_,_,_,_,_),
+	EnemyHP =< 0,
+	format('~a is defeated...\nCapture it or move to end the battle...\n', [Enemy]).
 pick(Toke) :-
 	myToke(MyToke),
 	searchInven(MyToke,Toke),
@@ -86,6 +94,10 @@ pick(_) :-
 attack :- checkStart, !.
 attack :- checkBattle(no), !.
 attack :- checkActiveToke, !.
+attack :-
+	enemyToke(Enemy,EnemyHP,_,_,_,_,_,_),
+	EnemyHP =< 0,
+	format('~a is defeated...\nCapture it or move to end the battle...\n', [Enemy]).
 attack :-
 	activeToke(Toke),
 	getAtt(Toke, Att),

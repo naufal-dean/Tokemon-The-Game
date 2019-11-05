@@ -1,41 +1,48 @@
 /* Database Tokemon/8 */
-/* Format: tokemon(nama_tokemon,hp,tipe,attack,skill,skill_damage,exp,level)
+/* Format: tokeData(nama_tokemon,hp,tipe,attack,skill,skill_damage,exp,level)
+% tokeData(Name,Hp,Type,Att,Skill,SkillDmg,Exp,Level))
 /* Legendary */
-tokemon(_,_,_,_,_,_,_,_) :- checkStart, !.
-tokemon('jojomon',100,leaves,20,'leaf typhoon',40,0,5).
-tokemon('annamon',120,water,17,'tsunami',35,0,5).
-tokemon('deanmon',85,fire,23,'fire breath',45,0,5).
-tokemon('hadimon',95,dark,17,'black hole',60,0,5).
-tokemon('doraemon',93,light,18,'kantong ajaib',50,0,5).
+tokeData(_,_,_,_,_,_,_,_) :- checkStart, !.
+tokeData('Jojomon',100,leaves,20,'leaf typhoon',40,0,5).
+tokeData('Annamon',120,water,17,'tsunami',35,0,5).
+tokeData('Deanmon',85,fire,23,'fire breath',45,0,5).
+tokeData('Hadimon',95,dark,17,'black hole',60,0,5).
+tokeData('Doraemon',93,light,18,'kantong ajaib',50,0,5).
 
 /* Normal */
-tokemon('insectmon',25,leaves,5,'acid blue',10,0,1).
-tokemon('waterlemon',30,water,4,'sweet seed',8,0,1).
-tokemon('chillmon',20,fire,6,'warm candy',12,0,1).
-tokemon('phillipmon',22,light,4,'white lamp',17,0,1).
-tokemon('gelapmon',24,dark,3,'electric die',18,0,1).
+tokeData('Insectmon',25,leaves,5,'acid blue',10,0,1).
+tokeData('Waterlemon',30,water,4,'sweet seed',8,0,1).
+tokeData('Chillmon',20,fire,6,'warm candy',12,0,1).
+tokeData('Phillipmon',22,light,4,'white lamp',17,0,1).
+tokeData('Gelapmon',24,dark,3,'electric die',18,0,1).
+
+% owned tokemon
+% format: tokemon(id,nama_tokemon,hp,tipe,attack,skill,skill_damage,exp,level)
 
 % selektor
+getName(_,_) :- checkStart, !.
+getName(Nick, Name) :- tokemon(Nick,Name,_,_,_,_,_,_,_).
+
 getHP(_,_) :- checkStart, !.
-getHP(Name, HP) :- tokemon(Name, HP,_,_,_,_,_,_).
+getHP(Nick, HP) :- tokemon(Nick,_,HP,_,_,_,_,_,_).
 
 getType(_,_) :- checkStart, !.
-getType(Name, Type) :- tokemon(Name, _, Type,_,_,_,_,_).
+getType(Nick, Type) :- tokemon(Nick,_,_,Type,_,_,_,_,_).
 
 getAtt(_,_) :- checkStart, !.
-getAtt(Name, Att) :- tokemon(Name, _,_, Att,_,_,_,_).
+getAtt(Nick, Att) :- tokemon(Nick,_,_,_,Att,_,_,_,_).
 
 getSkill(_,_) :- checkStart, !.
-getSkill(Name, Skill) :- tokemon(Name, _,_,_, Skill,_,_,_).
+getSkill(Nick, Skill) :- tokemon(Nick,_,_,_,_,Skill,_,_,_).
 
 getSkillDmg(_,_) :- checkStart, !.
-getSkillDmg(Name, SkillDmg) :- tokemon(Name, _,_,_,_, SkillDmg,_,_).
+getSkillDmg(Nick, SkillDmg) :- tokemon(Nick,_,_,_,_,_,SkillDmg,_,_).
 
 getExp(_,_) :- checkStart, !.
-getExp(Name, Exp) :- tokemon(Name, _,_,_,_,_, Exp,_).
+getExp(Nick, Exp) :- tokemon(Nick,_,_,_,_,_,_,Exp,_).
 
 getLevel(_,_) :- checkStart, !.
-getLevel(Name, Level) :- tokemon(Name, _,_,_,_,_,_, Level).
+getLevel(Nick, Level) :- tokemon(Nick,_,_,_,_,_,_,_,Level).
 
 showMyTokes :- checkStart, !.
 showMyTokes :-
@@ -46,14 +53,3 @@ showEnemies :- checkStart, !.
 showEnemies :-
 	enemy(Enemy),
 	showInven(Enemy).
-
-drop(_) :- checkStart, !.
-drop(Toke) :-
-	myToke(MyToke),
-	delTokemon(MyToke, Toke, NewToke),
-	retract(myToke(_)),
-	asserta(myToke(NewToke)),
-	write('You have dropped '), write(Toke),
-	!.
-drop(_) :-
-	write('You dont have that tokemon!'), nl.

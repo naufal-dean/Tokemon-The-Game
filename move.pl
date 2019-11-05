@@ -86,3 +86,4 @@ getLandType(LandType) :-
 	at(player, R, C),
 	at(LandType, R, C),
 	LandType \== player.
+getLandType(dirt).

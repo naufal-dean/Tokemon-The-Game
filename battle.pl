@@ -1,8 +1,10 @@
 battleStarted(no).
 encounter(no).
-% activeToke(Name,SkillStatus)
+
+% format: activeToke(Name,SkillStatus)
 activeToke(none,no).
-% enemyToke(Enemy,HP,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)
+
+% format: enemyToke(Enemy,HP,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)
 enemyToke(none,0,type,0,skill,0,0,0,no).
 
 initBattle(_) :- checkStart, !.
@@ -14,7 +16,7 @@ initBattle(Enemy) :-
 	asserta(encounter(yes)),
 	retractall(enemyToke(_,_,_,_,_,_,_,_,_)),
 	tokeData(Enemy,HP,Type,Damage,Skill,SkillDmg,Exp,Level),
-	asserta(enemyToke(Enemy,HP,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
+	asserta(enemyToke(Enemy,HP,Type,Damage,Skill,SkillDmg,Exp,Level,yes)),
 	format('A wild Tokemon appears! It is ~a...\nFight or Run?\n', [Enemy]).
 
 endBattle :- checkStart, !.
@@ -115,7 +117,7 @@ specialAttack :- checkActiveToke, !.
 specialAttack :-
 	activeToke(Toke,no),
 	getSkill(Toke,Skill),
-	format('Your skill, ~a, has been used...\n', [Skill])
+	format('Your skill, ~a, has been used...\n', [Skill]).
 specialAttack :-
 	enemyToke(Enemy,EnemyHP,_,_,_,_,_,_,_),
 	EnemyHP =< 0,

@@ -20,6 +20,14 @@ checkStart :-
 isEmpty([], true).
 isEmpty([_|_], false).
 
+% Fungsi Lain
+switch(X, [Val:Goal|Cases]) :-
+    ( X=Val ->
+        call(Goal)
+    ;
+        switch(X, Cases)
+    ).
+
 % =================== read/write file ===================
 writeFile(FilePath, Text) :-
   open(FilePath, write, Stream),

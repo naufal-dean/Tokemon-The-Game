@@ -28,12 +28,12 @@ at(gym, 4, 6).
 at(grass, 7, 8).
 
 % =============== POKEMON ===============
-enemy(['Jojomon', 'Annamon', 'Deanmon', 'Hadimon', 'Doraemon']).
-myToke(['Waterlemon']).
+enemy([jojomon, annamon, deanmon, hadimon, doraemon]).
+myToke([waterlemon]).
 
-tokemon('Jojomon','Jojomon',100,leaves,20,'leaf typhoon',40,0,5).
-tokemon('Annamon','Annamon',120,water,17,'tsunami',35,0,5).
-tokemon('Deanmon','Deanmon',85,fire,23,'fire breath',45,0,5).
-tokemon('Hadimon','Hadimon',95,dark,17,'black hole',60,0,5).
-tokemon('Doraemon','Doraemon',93,light,18,'kantong ajaib',50,0,5).
-tokemon('Waterlemon','Waterlemon',30,water,4,'sweet seed',8,0,1).
+tokemon(jojomon,jojomon,100,leaves,20,'leaf typhoon',40,0,5).
+tokemon(annamon,annamon,120,water,17,'tsunami',35,0,5).
+tokemon(deanmon,deanmon,85,fire,23,'fire breath',45,0,5).
+tokemon(hadimon,hadimon,95,dark,17,'black hole',60,0,5).
+tokemon(doraemon,doraemon,93,light,18,'kantong ajaib',50,0,5).
+tokemon(waterlemon,waterlemon,30,water,4,'sweet seed',8,0,1).

@@ -8,6 +8,7 @@ s :- movePlayer(1, 0).
 moves(0).
 
 movePlayer(_,_) :- checkStart, !.
+movePlayer(_,_) :- checkBattle(yes), !.
 movePlayer(DeltaR, DeltaC) :-
 	at(player, R, C),
 	RNew is R+DeltaR,
@@ -17,7 +18,7 @@ movePlayer(DeltaR, DeltaC) :-
 moveTo(_,_) :- checkStart, !.
 moveTo(RDest, CDest) :-
 	mapSize(Row, Col),
-	(RDest < 1 ; RDest > Row ; CDest < 1; CDest > Col; at(pagar, RDest, CDest)),
+	(RDest < 1 ; RDest > Row ; CDest < 1; CDest > Col; at(fence, RDest, CDest)),
 	invalidMoveMsg,
 	!.
 moveTo(RDest, CDest) :-

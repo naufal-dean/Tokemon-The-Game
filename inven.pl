@@ -2,6 +2,11 @@ searchInven(_,_) :- checkStart, !.
 searchInven([X|_], X).
 searchInven([_|T], X) :- searchInven(T, X).
 
+insertInven([], Y, [Y]) :- !.
+insertInven([X|Xs], Y, Z) :-
+	insertInven(Xs, Y, Z2),
+	Z = [X|Z2].
+
 delTokemon(_) :- checkStart, !.
 delTokemon(Nick) :-
 	myToke(MyToke),
@@ -29,16 +34,20 @@ drop(_) :-
 addTokemon(_,_) :- checkStart, !.
 addTokemon(Nick, Name) :-
 	tokeData(Name,Hp,Type,Att,Skill,SkillDmg,Exp,Level),
-	asserta(tokemon(Nick,Name,Hp,Type,Att,Skill,SkillDmg,Exp,Level)).
+	asserta(tokemon(Nick,Name,Hp,Type,Att,Skill,SkillDmg,Exp,Level)),
+	myToke(MyToke),
+	insertInven(MyToke, Nick, NewToke),
+	retract(myToke(_)),
+	asserta(myToke(NewToke)),
+	!.
 
 showInven(_) :- checkStart, !.
 showInven([]) :-
 	nl.
 showInven([Nick|T]) :-
-	getName(Nick, Name),
 	getHP(Nick, HP),
 	getType(Nick, Type),
-	format('~w\nHealth: ~w\nType: ~w\n\n', [Name, HP, Type]),
+	format('~w\nHealth: ~w\nType: ~w\n\n', [Nick, HP, Type]),
 	showInven(T).
 
 fullInven :- checkStart, !.

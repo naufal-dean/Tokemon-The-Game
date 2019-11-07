@@ -3,21 +3,21 @@
 % tokeData(Name,Hp,Type,Att,Skill,SkillDmg,Exp,Level))
 /* Legendary */
 tokeData(_,_,_,_,_,_,_,_) :- checkStart, !.
-tokeData('Jojomon',100,leaves,20,'leaf typhoon',40,0,5).
-tokeData('Annamon',120,water,17,'tsunami',35,0,5).
-tokeData('Deanmon',85,fire,23,'fire breath',45,0,5).
-tokeData('Hadimon',95,dark,17,'black hole',60,0,5).
-tokeData('Doraemon',93,light,18,'kantong ajaib',50,0,5).
+tokeData(jojomon,100,leaves,20,'leaf typhoon',40,0,5).
+tokeData(annamon,120,water,17,'tsunami',35,0,5).
+tokeData(deanmon,85,fire,23,'fire breath',45,0,5).
+tokeData(hadimon,95,dark,17,'black hole',60,0,5).
+tokeData(doraemon,93,light,18,'kantong ajaib',50,0,5).
 
 /* Normal */
-tokeData('Insectmon',25,leaves,5,'acid blue',10,0,1).
-tokeData('Waterlemon',30,water,4,'sweet seed',8,0,1).
-tokeData('Chillmon',20,fire,6,'warm candy',12,0,1).
-tokeData('Phillipmon',22,light,4,'white lamp',17,0,1).
-tokeData('Gelapmon',24,dark,3,'electric die',18,0,1).
-grassEnemies(['Insectmon', 'Gelapmon']).
-dirtEnemies(['Insectmon', 'Gelapmon', 'Phillipmon', 'Chillmon']).
-waterEnemies(['Waterlemon', 'Phillipmon']).
+tokeData(insectmon,25,leaves,5,'acid blue',10,0,1).
+tokeData(waterlemon,30,water,4,'sweet seed',8,0,1).
+tokeData(chillmon,20,fire,6,'warm candy',12,0,1).
+tokeData(phillipmon,22,light,4,'white lamp',17,0,1).
+tokeData(gelapmon,24,dark,3,'electric die',18,0,1).
+grassEnemies([insectmon, gelapmon]).
+dirtEnemies([insectmon, gelapmon, phillipmon, chillmon]).
+waterEnemies([waterlemon, phillipmon]).
 
 % owned tokemon
 % format: tokemon(id,nama_tokemon,hp,tipe,attack,skill,skill_damage,exp,level)

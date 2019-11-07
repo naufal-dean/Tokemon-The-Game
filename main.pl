@@ -1,5 +1,5 @@
 :- dynamic(gameStarted/1, at/3, enemy/1, myToke/1, playerName/1, moves/1).
-:- dynamic(battleStarted/1, encounter/1, activeToke/2, enemyToke/9).
+:- dynamic(battleStarted/1, encounter/1, activeToke/2, enemyToke/9, tokemon/9).
 
 :- include(initgame).
 :- include(util).
@@ -9,6 +9,7 @@
 :- include(tokemon).
 :- include(inven).
 :- include(battle).
+:- include(battleutil).
 
 % init game
 :- initialization(startGameMsg).
@@ -20,7 +21,8 @@ start :-
     asserta(gameStarted(yes)),
     welcomeMsg,
     initPlayer,
-    help,
+    help, nl,
+    map, nl,
     repeat,
         write('>>> '),
         read(Input),

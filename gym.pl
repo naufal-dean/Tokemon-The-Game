@@ -14,8 +14,8 @@ tryHeal :-
 	healUsed(no),
 	myToke(MyToke),
 	healAll(MyToke),
-	retract(heal(no)),
-	asserta(heal(yes)),
+	retract(healUsed(no)),
+	asserta(healUsed(yes)),
 	write('Your HP has been restored! Let\'s continue our journey!'), nl,
 	!.
 tryHeal :-

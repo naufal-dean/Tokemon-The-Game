@@ -20,7 +20,8 @@ dirtEnemies([insectmon, gelapmon, phillipmon, chillmon]).
 waterEnemies([waterlemon, phillipmon]).
 
 % owned tokemon
-% format: tokemon(id,nama_tokemon,hp,tipe,attack,skill,skill_damage,exp,level)
+% tokemon/9
+% format: tokemon(Nick,Name,Hp,Type,Att,Skill,SkillDmg,Exp,Level)
 
 % selektor
 getName(_,_) :- checkStart, !.

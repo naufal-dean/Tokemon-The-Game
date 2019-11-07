@@ -8,7 +8,13 @@ s :- movePlayer(1, 0).
 moves(0).
 
 movePlayer(_,_) :- checkStart, !.
-movePlayer(_,_) :- checkBattle(yes), !.
+movePlayer(_,_) :- 
+	battleStarted(yes),
+	enemyToke(_,HP,_,_,_,_,_,_,_),
+	HP > 0,
+	checkBattle(yes),
+	write('Type "run." to exit the battle'), nl,
+	!.
 movePlayer(DeltaR, DeltaC) :-
 	at(player, R, C),
 	RNew is R+DeltaR,

@@ -4,14 +4,16 @@ do(start) :-
   gameStarted(yes),
   ongoingGameMsg,
   !.
-
+do(quit) :-
+  quit,
+  !, fail.
 do(X) :-
 	\+ command(X),
 	invalidInputMsg,
   !.
-
 do(X) :-
-	X.
+	X,
+  !.
 
 checkStart :-
   gameStarted(no),
@@ -47,15 +49,23 @@ printStream(Char, Stream) :-
   get_char(Stream, Char2),
   printStream(Char2, Stream).
 
-load_internal(FileName) :-
+assertFromFile(Stream, []) :-
+    at_end_of_stream(Stream), !.
+assertFromFile(Stream, [H|T]) :-
+    \+ at_end_of_stream(Stream), !,
+    read(Stream, H),
+    asserta(H),
+    assertFromFile(Stream, T).
+
+reloadGame(FileName) :-
   retractall(at(_,_,_)),
-  retract(i_am_at(_,_)),
-  retractall(alive(_,_,_,_)),
-  retract(player(_,_,_)),
-  retract(playerInventory(_)),
-  retractall(playerWeapon(_)),
+  retractall(enemy(_)),
+  retractall(myToke(_)),
+  retractall(tokemon(_,_,_,_,_,_,_,_,_)),
+  retractall(healUsed(_)),
+
   open(FileName, read, Stream),
-  readfile(Stream, _),
+  assertFromFile(Stream, _),
   close(Stream).
 
 % ===================== Messages =====================

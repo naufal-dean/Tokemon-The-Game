@@ -10,17 +10,17 @@ enemyToke(none,0,type,0,skill,0,0,0,no).
 
 fight :- checkStart, !.
 fight :- checkBattle(no), !.
-fight :- checkDefeated, !.
+fight :- checkDefeat, !.
 fight :-
 	retract(encounter(yes)),
 	asserta(encounter(no)),
-	write('Choose your tokemon using pick(tokemon_name)'), nl,
+	write('Choose your tokemon using pick(tokemon_name).'), nl,
 	!.
 fight :- checkBattle(yes), !.
 
 run :- checkStart, !.
 run :- checkBattle(no), !.
-run :- checkDefeated, !.
+run :- checkDefeat, !.
 run :-
 	retractall(encounter(_)),
 	asserta(encounter(no)),
@@ -31,7 +31,7 @@ run :-
 pick(_) :- checkStart, !.
 pick(_) :- checkBattle(no), !.
 pick(_) :- checkEncounter, !.
-pick(_) :- checkDefeated, !.
+pick(_) :- checkDefeat, !.
 pick(Toke) :-
 	myToke(MyToke),
 	searchInven(MyToke,Toke),
@@ -42,13 +42,14 @@ pick(Toke) :-
 	!.
 pick(_) :-
 	write('You don\'t have that Tokemon!'), nl,
+	write('Type "status." to see your Tokemons!'), nl,
 	!.
 
 attack :- checkStart, !.
 attack :- checkBattle(no), !.
 attack :- checkEncounter, !.
 attack :- checkActiveToke, !.
-attack :- checkDefeated, !.
+attack :- checkDefeat, !.
 attack :-
 	activeToke(Toke, _),
 	getAtt(Toke, Att),
@@ -65,7 +66,7 @@ specialAttack :- checkStart, !.
 specialAttack :- checkBattle(no), !.
 specialAttack :- checkEncounter, !.
 specialAttack :- checkActiveToke, !.
-specialAttack :- checkDefeated, !.
+specialAttack :- checkDefeat, !.
 specialAttack :-
 	activeToke(Toke,no),
 	getSkill(Toke,Skill),

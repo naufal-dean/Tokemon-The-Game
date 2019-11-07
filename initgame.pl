@@ -1,24 +1,6 @@
-% daftar command yang valid
-command(start).
-command(quit).
-command(help).
-command(map).
-command(n).
-command(e).
-command(w).
-command(s).
-command(status).
-command(drop(_)).
-command(fight).
-command(run).
-command(attack).
-command(specialAttack).
-command(capture).
-command(pick(_)).
+% Kalo nambah di sini jangan lupa masukin di reloadGame di util.pl
 
 % ================= MAP =================
-mapSize(10, 10).
-
 % posisi awal pemain & benda lain
 at(player, 5, 5).
 at(fence, 1, 2).
@@ -37,3 +19,6 @@ tokemon(deanmon,deanmon,85,fire,23,'fire breath',45,0,5).
 tokemon(hadimon,hadimon,95,dark,17,'black hole',60,0,5).
 tokemon(doraemon,doraemon,93,light,18,'kantong ajaib',50,0,5).
 tokemon(waterlemon,waterlemon,30,water,4,'sweet seed',8,0,1).
+
+% ================ OTHER ================
+healUsed(no).

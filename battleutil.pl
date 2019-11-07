@@ -44,8 +44,8 @@ checkActiveToke :-
 	write('You must Pick a Tokemon first!'), nl,
 	!.
 
-checkDefeated :- checkStart, !.
-checkDefeated :-
+checkDefeat :- checkStart, !.
+checkDefeat :-
 	enemyToke(Enemy,HP,_,_,_,_,_,_,_),
 	HP =< 0,
 	format('~a has been defeated!', [Enemy]), nl,
@@ -53,7 +53,7 @@ checkDefeated :-
 	!.
 
 enemyTurn :- checkStart, !.
-enemyTurn :- checkDefeated, !.
+enemyTurn :- checkDefeat, !.
 enemyTurn :-
 	write('Enemy\'s turn...'), nl,
 	!.

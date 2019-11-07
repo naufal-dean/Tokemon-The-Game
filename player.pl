@@ -7,22 +7,26 @@ initPlayer :-
 	read(Name),
 	retract(playerName(_)),
 	asserta(playerName(Name)),
-	format('Woww, nama yang bagus..\nSelamat datang ~a, di dunia Tokemon yang indah ini...\n\n', [Name]).
+	format('Woww, nama yang bagus..\nSelamat datang ~a, di dunia Tokemon yang indah ini...', [Name]), nl, nl,
+	!.
 
 status :- checkStart, !.
 status :-
 	write('Your Tokemon:'), nl, showMyTokes,
-	write('Your Enemy:'), nl, showEnemies.
+	write('Your Enemy:'), nl, showEnemies,
+	!.
 
 checkCond :- checkStart, !.
 checkCond :-
 	myToke(MyToke),
 	isEmpty(MyToke, true),
-	lose.
+	lose,
+	!.
 checkCond :-
 	enemy(Enemy),
 	isEmpty(Enemy, true),
-	win.
+	win,
+	!.
 
 lose :- checkStart, !.
 lose :- loseMsg, quit, abort, !.

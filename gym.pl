@@ -6,7 +6,7 @@ heal :-
 	tryHeal,
 	!.
 heal :-
-	write('You can only heal you tokemons at gym.'), nl,
+	notAtGymMsg,
 	!.
 
 tryHeal :- checkStart, !.
@@ -16,10 +16,10 @@ tryHeal :-
 	healAll(MyToke),
 	retract(healUsed(no)),
 	asserta(healUsed(yes)),
-	write('Your HP has been restored! Let\'s continue our journey!'), nl,
+	healedMsg,
 	!.
 tryHeal :-
-	write('You have used your heal chance!'), nl,
+	noHealChanceMsg,
 	!.
 
 healAll(_) :- checkStart, !.

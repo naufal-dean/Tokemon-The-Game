@@ -3,13 +3,19 @@ Available commands:
     help. -- show available commands
     quit. -- quit the game
     n. s. e. w. -- move
-    map.-- look at the map
-    heal -- cure Tokemon in inventory if in gym center
-    status. -- show your status'), nl.
+    map. -- look at the map
+    heal. -- cure all Tokemons in inventory if in gym center
+    status. -- show your status
     save(Filename). -- save your game
     load(Filename). -- load previously saved game
+    drop(tokemon_name). -- drop your tokemon (do it wisely!)
 
 Legends:
     - X = Pagar
     - P = Player
     - G = Gym
+    - " = Forest
+    - , = Grass
+    - - = Dirt
+    - ~ = Water
+    - o = Cave

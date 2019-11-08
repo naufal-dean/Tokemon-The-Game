@@ -1,4 +1,4 @@
-% DAFTAR COMMAND VALID
+% ====================== DAFTAR COMMAND VALID ======================
 command(start).
 command(quit).
 command(help).
@@ -17,5 +17,5 @@ command(capture).
 command(pick(_)).
 command(heal).
 
-% MAP
-mapSize(10, 10).
+% ============================== MAP ==============================
+mapSize(20, 20).

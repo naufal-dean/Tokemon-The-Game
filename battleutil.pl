@@ -24,24 +24,23 @@ endBattle :-
 checkBattle(_) :- checkStart, !.
 checkBattle(no) :-
 	battleStarted(no),
-	write('You are not in a battle!'), nl,
+	notOnBattleMsg,
 	!.
 checkBattle(yes) :-
 	battleStarted(yes),
-	write('You have a battle await, young master!'), nl,
+	onBattleMsg,
 	!.
 
 checkEncounter :- checkStart, !.
 checkEncounter :-
 	encounter(yes),
-	write('A wild Tokemon is in front of you!'), nl,
-	write('Fight or Run?'), nl,
+	encounterMsg,
 	!.
 
 checkActiveToke :- checkStart, !.
 checkActiveToke :-
 	activeToke(none, no),
-	write('You must Pick a Tokemon first!'), nl,
+	noPickedTokeMsg,
 	!.
 
 checkDefeat :- checkStart, !.

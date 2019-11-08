@@ -99,20 +99,16 @@ capture :-
 capture :-
 	enemyToke(Enemy,_,_,_,_,_,_,_,_),
 	repeat,
-	write('Name your new tokemon: '),
-	read(Nick),
-	(	uniqueNick(Nick) -> (captured(Nick, Enemy), !, fail)
-	;	notCaptured(Nick)
-	).
-
-captured(_,_) :- checkStart, !.
-captured(Nick, Enemy) :-
-	enemyToke(Enemy,_,_,_,_,_,_,_,_),
-	addTokemon(Nick, Enemy),
-	format('~a is captured!', [Nick]), nl,
-	endBattle.
-
-notCaptured(_) :- checkStart, !.
-notCaptured(Nick) :-
-	write(Nick), write(' has been taken.'), nl,
-	write('Try "'), write(Nick), write('2"?'), nl.
+		write('Name your new tokemon: '),
+		read(Nick),
+		(	uniqueNick(Nick) -> (
+				!,
+				enemyToke(Enemy,_,_,_,_,_,_,_,_),
+				addTokemon(Nick, Enemy),
+				format('~a is captured!', [Nick]), nl,
+				endBattle
+			) ; (
+				write(Nick), write(' has been taken.'), nl,
+				write('Try "'), write(Nick), write('2"?'), nl
+			)
+		).

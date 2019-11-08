@@ -24,16 +24,30 @@ movePlayer(DeltaR, DeltaC) :-
 moveTo(_,_) :- checkStart, !.
 moveTo(RDest, CDest) :-
 	mapSize(Row, Col),
-	(RDest < 1 ; RDest > Row ; CDest < 1; CDest > Col; at(fence, RDest, CDest)),
+	(
+		RDest < 1 ;
+		RDest > Row;
+		CDest < 1;
+		CDest > Col;
+		at(fence, RDest, CDest);
+		at(water, RDest, CDest)
+	),
 	invalidMoveMsg,
 	!.
 moveTo(RDest, CDest) :-
 	retract(at(player, R, C)),
+	((
+		at(Terrain1, R, C),
+		at(Terrain2, RDest, CDest),
+		Terrain1 \== Terrain2
+	) -> (
+		write('Arrived at '), write(Terrain2), nl
+	) ; (
+		DeltaR is RDest-R,
+		DeltaC is CDest-C,
+		moveMsg(DeltaR, DeltaC)
+	)),
 	asserta(at(player, RDest, CDest)),
-	DeltaR is RDest-R,
-	DeltaC is CDest-C,
-	moveMsg(DeltaR, DeltaC),
-
 	retract(moves(MoveCnt)),
 	MoveCntPlus is MoveCnt+1,
 	asserta(moves(MoveCntPlus)),
@@ -50,15 +64,15 @@ calcChance(Chance) :-
 	random(1, ChanceCap, Chance).
 
 % Chance : random (1-1000) + (10-60) + 1-..(500?)
-% Base : 80% no enemy, 15% normal, 5% legend
+% Base : 90% no enemy, 9% normal, 1% legend
 % 100 moves & 2 toke : +- 1%
 % 1000 moves & 6 toke : +- 15%
 triggerEnemy(_) :- checkStart, !.
 triggerEnemy(Chance) :-
-	Chance < 800,
+	Chance < 900,
 	!.
 triggerEnemy(Chance) :-
-	Chance < 950,
+	Chance < 990,
 	
 	getLandType(LandType),
 	enemiesOn(LandType, Enemies),

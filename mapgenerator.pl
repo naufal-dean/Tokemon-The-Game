@@ -9,6 +9,7 @@ generateMap :-
 	mapSize(Row, Col),
 	R is Row//2, C is Col//2,
 	asserta(point(dirt, R, C)),
+	asserta(at(dirt, R, C)),
 	NumPoint is floor(Row/8*Col/8),
 	generateTerrain(NumPoint),
 	placeTerrain(1,1),

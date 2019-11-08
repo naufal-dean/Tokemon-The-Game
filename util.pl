@@ -1,5 +1,6 @@
 % =================== validasi input ===================
 do(_) :- checkStart, !.
+do(X) :- checkValidInput(X), !.
 do(start) :-
   gameStarted(yes),
   ongoingGameMsg,
@@ -22,13 +23,9 @@ checkStart :-
 isEmpty([], true).
 isEmpty([_|_], false).
 
-% Fungsi Lain
-switch(X, [Val:Goal|Cases]) :-
-    ( X is Val ->
-        call(Goal)
-    ;
-        switch(X, Cases)
-    ).
+checkValidInput(X) :-
+  \+ atom(X),
+  write('Please enter a valid name!'), nl.
 
 % =================== read/write file ===================
 writeFile(FilePath, Text) :-

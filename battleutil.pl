@@ -57,7 +57,8 @@ enemyTurn :-
 	write('Enemy\'s turn...'), nl,
 	!.
 
-uniqueNick(_) :- checkStart, !.
+uniqueNick(_) :- checkStart, !, fail.
+uniqueNick(X) :- checkValidInput(X), !, fail.
 uniqueNick(Nick) :-
 	myToke(MyToke),
 	searchInven(MyToke, Nick),

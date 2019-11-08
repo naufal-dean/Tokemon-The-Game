@@ -3,12 +3,19 @@ playerName('Ahadi').
 
 initPlayer :- checkStart, !.
 initPlayer :-
-	write('Enter your name: '),
-	read(Name),
-	retract(playerName(_)),
-	asserta(playerName(Name)),
-	format('Woww, nama yang bagus..\nSelamat datang ~a, di dunia Tokemon yang indah ini...', [Name]), nl, nl,
-	!.
+	repeat,
+		write('Enter your name: '),
+		read(Name),
+		(	validName(Name) -> (
+				retract(playerName(_)),
+				asserta(playerName(Name)),
+				format('Woww, nama yang bagus..\nSelamat datang ~a, di dunia Tokemon yang indah ini...', [Name]), nl, nl
+			)
+		),
+		!.
+validName(_) :- checkStart, !, fail.
+validName(Name) :- checkValidInput(Name), !, fail.
+validName(_).
 
 status :- checkStart, !.
 status :-

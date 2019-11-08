@@ -39,6 +39,7 @@ delTokemonUtil([H|T], X, L) :-
 	delTokemonUtil(T, X, [H|L]).
 
 drop(_) :- checkStart, !.
+drop(X) :- checkValidInput(X), !.
 drop(_) :-
 	countToke(1),
 	write('You only have one tokemon, please do not drop him/her :('), nl,

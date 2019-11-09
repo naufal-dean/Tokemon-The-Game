@@ -60,12 +60,85 @@ attackModifier(strong,light,dark) :- !.
 attackModifier(weak,leaves,fire) :- !.
 attackModifier(weak,fire,water) :- !.
 attackModifier(weak,water,leaves) :- !.
+attackModifier(normal,_,_) :- !.
 
 enemyTurn :- checkStart, !.
 enemyTurn :- checkDefeat, !.
 enemyTurn :-
-	write('Enemy\'s turn...'), nl,
+	nl, write('Enemy\'s turn...'), nl,
+	random(0,4,X),
+	enemyAttack(X),
 	!.
+
+enemyAttack(_) :- checkStart, !.
+enemyAttack(X) :-
+	X < 1,
+	enemyToke(Enemy,_,EnemyType,_,EnemySkill,EnemySkillDmg,_,_,yes),
+	activeToke(Toke,_),
+	tokemon(Toke,_,OurHP,OurType,_,_,_,_,_),
+	attackModifier(Modifier,EnemyType,OurType),
+	format('~a casts ~a upon you!', [Enemy, EnemySkill]), nl,
+	(Modifier == strong -> (
+			!,
+			ModEnemySkillDmg is EnemySkillDmg + floor(EnemySkillDmg * 0.5),
+			write('Nooo.. It\'s effective!'), nl
+		) ; ( Modifier == weak -> (
+						!,
+						ModEnemySkillDmg is EnemySkillDmg - floor(EnemySkillDmg * 0.5),
+						write('Easy! It\'s not very effective...'), nl
+					) ; (
+						!,
+						ModEnemySkillDmg is EnemySkillDmg
+					)
+		)
+	),
+	format('~a dealt ~w skill damage to ~a...', [Enemy, ModEnemySkillDmg, Toke]), nl,
+	NewHP is OurHP - ModEnemySkillDmg,
+	retract(tokemon(Toke,O2,_,O4,O5,O6,O7,O8,O9)),
+	asserta(tokemon(Toke,O2,NewHP,O4,O5,O6,O7,O8,O9)),
+	retract(enemyToke(Enemy,En2,En3,En4,En5,En6,En7,En8,yes)),
+	asserta(enemyToke(Enemy,En2,En3,En4,En5,En6,En7,En8,no)),
+	isTokeLost(Toke),
+	!.
+enemyAttack(_) :-
+	enemyToke(Enemy,_,EnemyType,EnemyDmg,_,_,_,_,_),
+	activeToke(Toke,_),
+	tokemon(Toke,_,OurHP,OurType,_,_,_,_,_),
+	attackModifier(Modifier,EnemyType,OurType),
+	format('~a attacks your ~a!', [Enemy, Toke]), nl,
+	(Modifier == strong -> (
+			!,
+			ModEnemyDmg is EnemyDmg + floor(EnemyDmg * 0.5),
+			write('It\'s hurt!'), nl
+		) ; ( Modifier == weak -> (
+						!,
+						ModEnemyDmg is EnemyDmg - floor(EnemyDmg * 0.5),
+						write('It\'s weak...'), nl
+					) ; (
+						!,
+						ModEnemyDmg is EnemyDmg
+					)
+		)
+	),
+	format('~a dealt ~w damage to ~a...', [Enemy, ModEnemyDmg, Toke]), nl,
+	NewHP is OurHP - ModEnemyDmg,
+	retract(tokemon(Toke,O2,_,O4,O5,O6,O7,O8,O9)),
+	asserta(tokemon(Toke,O2,NewHP,O4,O5,O6,O7,O8,O9)),
+	isTokeLost(Toke),
+	!.
+
+isTokeLost(_) :- checkStart, !.
+isTokeLost(Toke) :-
+	tokemon(Toke,_,HP,_,_,_,_,_,_),
+	HP =< 0,
+	delTokemon(Toke),
+	retractall(activeToke(_, _)),
+	asserta(activeToke(none, no)),
+	format('Noo! ~a has defeated...', [Toke]), nl,
+	( \+ countToke(0) -> (
+			write('You must pick another Tokemon!'), nl
+		)
+	).
 
 uniqueNick(_) :- checkStart, !, fail.
 uniqueNick(X) :- checkValidInput(X), !, fail.

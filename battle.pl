@@ -55,39 +55,26 @@ attack :-
 	activeToke(Toke,_),
 	tokemon(Toke,_,_,OurType,Att,_,_,_,_),
 	enemyToke(Enemy,EnemyHP,EnemyType,_,_,_,_,_,_),
-	attackModifier(strong,OurType,EnemyType),
-	ModAtt is Att + floor(Att * 0.5),
-	NewHP is EnemyHP - ModAtt,
-	retract(enemyToke(Enemy,_,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
-	asserta(enemyToke(Enemy,NewHP,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
+	attackModifier(Modifier,OurType,EnemyType),
 	format('~a attacks!', [Toke]), nl,
-	write('It\'s super effective!'), nl,
+	(Modifier == strong -> (
+			!,
+			ModAtt is Att + floor(Att * 0.5),
+			write('It\'s super effective!'), nl
+		) ; ( Modifier == weak -> (
+						!,
+						ModAtt is Att - floor(Att * 0.5),
+						write('It\'s weak against the enemy!'), nl
+					) ; (
+						!,
+						ModAtt is Att
+					)
+		)
+	),
 	format('~a dealt ~w damage to ~a...', [Toke, ModAtt, Enemy]), nl,
-	enemyTurn,
-	!.
-attack :-
-	activeToke(Toke,_),
-	tokemon(Toke,_,_,OurType,Att,_,_,_,_),
-	enemyToke(Enemy,EnemyHP,EnemyType,_,_,_,_,_,_),
-	attackModifier(weak,OurType,EnemyType),
-	ModAtt is Att - floor(Att * 0.5),
 	NewHP is EnemyHP - ModAtt,
-	retract(enemyToke(Enemy,_,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
-	asserta(enemyToke(Enemy,NewHP,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
-	format('~a attacks!', [Toke]), nl,
-	write('It\'s weak against the enemy!'), nl,
-	format('~a dealt ~w damage to ~a...', [Toke, ModAtt, Enemy]), nl,
-	enemyTurn,
-	!.
-attack :-
-	activeToke(Toke,_),
-	getAtt(Toke,Att),
-	enemyToke(Enemy,EnemyHP,_,_,_,_,_,_,_),
-	NewHP is EnemyHP - Att,
-	retract(enemyToke(Enemy,_,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
-	asserta(enemyToke(Enemy,NewHP,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
-	format('~a attacks!', [Toke]), nl,
-	format('~a dealt ~w damage to ~a...', [Toke, Att, Enemy]), nl,
+	retract(enemyToke(Enemy,_,En3,En4,En5,En6,En7,En8,En9)),
+	asserta(enemyToke(Enemy,NewHP,En3,En4,En5,En6,En7,En8,En9)),
 	enemyTurn,
 	!.
 
@@ -105,46 +92,28 @@ specialAttack :-
 	activeToke(Toke, yes),
 	tokemon(Toke,_,_,OurType,_,OurSkill,OurSkillDmg,_,_),
 	enemyToke(Enemy,EnemyHP,EnemyType,_,_,_,_,_,_),
-	attackModifier(strong,OurType,EnemyType),
-	ModOurSkillDmg is OurSkillDmg + floor(OurSkillDmg * 0.5),
+	attackModifier(Modifier,OurType,EnemyType),
+	format('~a casts ~a!', [Toke, OurSkill]), nl,
+	(Modifier == strong -> (
+			!,
+			ModOurSkillDmg is OurSkillDmg + floor(OurSkillDmg * 0.5),
+			write('The damage is increased! It\'s effective...'), nl
+		) ; ( Modifier == weak -> (
+						!,
+						ModOurSkillDmg is OurSkillDmg - floor(OurSkillDmg * 0.5),
+						write('Oh no! The damage is reduced...'), nl
+					) ; (
+						!,
+						ModOurSkillDmg is OurSkillDmg
+					)
+		)
+	),
+	format('~a dealt ~w skill damage to ~a...', [Toke, ModOurSkillDmg, Enemy]), nl,
 	NewHP is EnemyHP - ModOurSkillDmg,
-	retract(enemyToke(Enemy,_,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
-	asserta(enemyToke(Enemy,NewHP,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
+	retract(enemyToke(Enemy,_,En3,En4,En5,En6,En7,En8,En9)),
+	asserta(enemyToke(Enemy,NewHP,En3,En4,En5,En6,En7,En8,En9)),
 	retract(activeToke(Toke,yes)),
 	asserta(activeToke(Toke,no)),
-	format('~a casts ~a!', [Toke, OurSkill]), nl,
-	write('The damage is increased! It\'s effective...'), nl,
-	format('~a dealt ~w damage to ~a...', [Toke, ModOurSkillDmg, Enemy]), nl,
-	enemyTurn,
-	!.
-specialAttack :-
-	activeToke(Toke, yes),
-	tokemon(Toke,_,_,OurType,_,OurSkill,OurSkillDmg,_,_),
-	enemyToke(Enemy,EnemyHP,EnemyType,_,_,_,_,_,_),
-	attackModifier(weak,OurType,EnemyType),
-	ModOurSkillDmg is OurSkillDmg - floor(OurSkillDmg * 0.5),
-	NewHP is EnemyHP - ModOurSkillDmg,
-	retract(enemyToke(Enemy,_,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
-	asserta(enemyToke(Enemy,NewHP,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
-	retract(activeToke(Toke,yes)),
-	asserta(activeToke(Toke,no)),
-	format('~a casts ~a!', [Toke, OurSkill]), nl,
-	write('Oh no! The damage is reduced...'), nl,
-	format('~a dealt ~w damage to ~a...', [Toke, ModOurSkillDmg, Enemy]), nl,
-	enemyTurn,
-	!.
-specialAttack :-
-	activeToke(Toke, yes),
-	getSkill(Toke,OurSkill),
-	getSkillDmg(Toke,OurSkillDmg),
-	enemyToke(Enemy,EnemyHP,_,_,_,_,_,_,_),
-	NewHP is EnemyHP - OurSkillDmg,
-	retract(enemyToke(Enemy,_,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
-	asserta(enemyToke(Enemy,NewHP,Type,Damage,Skill,SkillDmg,Exp,Level,SkillStatus)),
-	retract(activeToke(Toke,yes)),
-	asserta(activeToke(Toke,no)),
-	format('~a casts ~a!', [Toke, OurSkill]), nl,
-	format('~a dealt ~w damage to ~a...', [Toke, OurSkillDmg, Enemy]), nl,
 	enemyTurn,
 	!.
 

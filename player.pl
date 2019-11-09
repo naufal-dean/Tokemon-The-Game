@@ -9,7 +9,7 @@ initPlayer :-
 		(	validName(Name) -> (
 				retract(playerName(_)),
 				asserta(playerName(Name)),
-				format('Woww, nama yang bagus..\nSelamat datang ~a, di dunia Tokemon yang indah ini...', [Name]), nl, nl
+				format('Woww, nice name! \nWelcome ~a to this wonderful World of Tokemon!...', [Name]), nl, nl
 			)
 		),
 		!.

@@ -15,6 +15,7 @@ tokeData(waterlemon,30,water,4,'sweet seed',8,0,1).
 tokeData(chillmon,20,fire,6,'warm candy',12,0,1).
 tokeData(phillipmon,22,light,4,'white lamp',17,0,1).
 tokeData(gelapmon,24,dark,3,'electric die',18,0,1).
+tokeData(flatmon,25,neutral,4,'flatt!!!',11,0,1).
 grassEnemies([insectmon, gelapmon]).
 dirtEnemies([insectmon, gelapmon, phillipmon, chillmon]).
 waterEnemies([waterlemon, phillipmon]).

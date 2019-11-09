@@ -97,6 +97,12 @@ capture :-
 	enemyToke(Enemy,_,_,_,_,_,_,_,_),
 	write('~a is not defeated yet!', [Enemy]), nl,
 	!.
+
+capture :-
+	countToke(6),
+	write('You already have six tokemon \nPlease drop one of them if you want to capture this new Tokemon by using drop(<tokemon_name>'), nl,
+	!.
+
 capture :-
 	enemyToke(Enemy,_,_,_,_,_,_,_,_),
 	repeat,

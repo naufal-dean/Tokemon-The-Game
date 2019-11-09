@@ -139,6 +139,7 @@ isTokeLost(Toke) :-
 			write('You must pick another Tokemon!'), nl
 		)
 	).
+isTokeLost(_).
 
 uniqueNick(_) :- checkStart, !, fail.
 uniqueNick(X) :- checkValidInput(X), !, fail.

@@ -51,6 +51,16 @@ checkDefeat :-
 	write('Capture it or Move around to end the battle.'), nl,
 	!.
 
+attackModifier(_,_,_) :- checkStart, !.
+attackModifier(strong,fire,leaves) :- !.
+attackModifier(strong,leaves,water) :- !.
+attackModifier(strong,water,fire) :- !.
+attackModifier(strong,dark,light) :- !.
+attackModifier(strong,light,dark) :- !.
+attackModifier(weak,leaves,fire) :- !.
+attackModifier(weak,fire,water) :- !.
+attackModifier(weak,water,leaves) :- !.
+
 enemyTurn :- checkStart, !.
 enemyTurn :- checkDefeat, !.
 enemyTurn :-

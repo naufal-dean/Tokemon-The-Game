@@ -11,7 +11,7 @@ tokemon(doraemon,doraemon,93,light,18,'kantong ajaib',50,0,5).
 tokemon(waterlemon,waterlemon,30,water,4,'sweet seed',8,0,1).
 
 % Initial Player's Toke (1 normal)
-myToke([waterlemon]).
+myToke([waterlemon, hadimon, deanmon, annamon, jojomon, doraemon]).
 
 % ============================== OTHER ==============================
 healUsed(no).

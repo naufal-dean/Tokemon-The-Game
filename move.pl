@@ -8,12 +8,20 @@ s :- movePlayer(1, 0).
 moves(0).
 
 movePlayer(_,_) :- checkStart, !.
-movePlayer(_,_) :- 
+movePlayer(_,_) :-
 	battleStarted(yes),
 	enemyToke(_,HP,_,_,_,_,_,_,_),
 	HP > 0,
 	checkBattle(yes),
 	write('Type "run." to exit the battle'), nl,
+	!.
+movePlayer(DeltaR, DeltaC) :-
+	battleStarted(yes),
+	enemyToke(_,HP,_,_,_,_,_,_,_),
+	HP =< 0,
+	endBattle,
+	write('You left the battlefield...'), nl,
+	movePlayer(DeltaR, DeltaC),
 	!.
 movePlayer(DeltaR, DeltaC) :-
 	at(player, R, C),
@@ -73,11 +81,11 @@ triggerEnemy(Chance) :-
 	!.
 triggerEnemy(Chance) :-
 	Chance < 990,
-	
+
 	getLandType(LandType),
 	enemiesOn(LandType, Enemies),
 	countFromList(Enemies, NBElements),
-	
+
 	random(0, NBElements, X), Idx is X-1,
 	nth(Idx, Enemies, Encounter),
 	initBattle(Encounter),

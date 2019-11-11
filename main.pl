@@ -44,9 +44,7 @@ start :-
     repeat,
         write('>>> '),
         read(Input),
-        (   do(Input) -> true
-        ;   (!, fail)
-        ),
+        do(Input),
         checkCond.
 
 quit :- checkStart, !.

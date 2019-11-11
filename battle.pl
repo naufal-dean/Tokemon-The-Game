@@ -32,7 +32,7 @@ pick(_) :- checkStart, !.
 pick(_) :- checkBattle(no), !.
 pick(_) :- checkEncounter, !.
 pick(_) :- checkDefeat, !.
-% pick(X) :- checkValidInput(X), !.
+pick(X) :- checkInvalidInput(X), !.
 pick(Toke) :-
 	myToke(MyToke),
 	searchInven(MyToke,Toke),

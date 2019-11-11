@@ -6,16 +6,17 @@ initPlayer :-
 	repeat,
 		write('Enter your name: '),
 		read(Name),
-		(	validName(Name) -> (
+		(	\+ invalidName(Name) -> (
+				!,
 				retract(playerName(_)),
 				asserta(playerName(Name)),
 				format('Woww, nice name! \nWelcome ~a to this wonderful World of Tokemon!...', [Name]), nl, nl
 			)
 		),
 		!.
-validName(_) :- checkStart, !, fail.
-validName(Name) :- checkValidInput(Name), !, fail.
-validName(_).
+
+invalidName(_) :- checkStart, !.
+invalidName(Name) :- checkInvalidInput(Name), !.
 
 status :- checkStart, !.
 status :-

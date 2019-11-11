@@ -1,6 +1,5 @@
 % =================== validasi input ===================
 do(_) :- checkStart, !.
-do(X) :- checkValidInput(X), !.
 do(start) :-
   gameStarted(yes),
   ongoingGameMsg,
@@ -23,9 +22,11 @@ checkStart :-
 isEmpty([], true).
 isEmpty([_|_], false).
 
-checkValidInput(X) :-
+checkInvalidInput(X) :-
   \+ atom(X),
-  write('Please enter a valid name!'), nl.
+  write(X),
+  write('Please enter a valid name!'), nl,
+  !.
 
 % =================== read/write file ===================
 writeFile(FilePath, Text) :-

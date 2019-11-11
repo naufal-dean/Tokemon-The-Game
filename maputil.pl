@@ -41,6 +41,26 @@ closestPointFrom(R, C, Terrain, RT, CT) :-
 	!.
 
 % =================== Validasi Map Generator ===================
+validPoint(_,_,_) :- checkStart, !.
+validPoint(water, R, C) :-
+	mapSize(Row, Col),
+	((R =< floor(0.9*Row)), (R >= floor(0.1*Row))),
+	((C =< floor(0.9*Col)), (C >= floor(0.1*Col))),
+	!, fail.
+validPoint(water, R, C) :-
+	noPointAround(R, C),
+	!.
+validPoint(_, R, C) :-
+	noPointAround(R, C),
+	mapSize(Row, Col),
+	((R >= floor(0.8*Row)); (R =< floor(0.2*Row))),
+	((C >= floor(0.8*Col)); (C =< floor(0.2*Col))),
+	!, fail.
+validPoint(_, R, C) :-
+	noPointAround(R, C),
+	!.
+
+
 noPointAround(_,_) :- checkStart, !.
 noPointAround(R, C)	:-
 	(
@@ -67,7 +87,7 @@ validGymPos(R, C) :-
 			closestBuildingFrom(R, C, gym, RB, CB, gym),
 			dist(R, C, RB, CB, Dist),
 			mapSize(Row, Col),
-			Dist < (Row+Col)/10
+			Dist < (Row+Col)/13
 		)
 	), !, false.
 validGymPos(_,_).
@@ -85,14 +105,13 @@ validFencePos(R1, C1, R2, C2) :-
 validFencePos(_,_,_,_).
 
 % =========================== Terrain Chance ===========================
-% cave  : 10%
-% water : 15%
-% dirt  : 15%
+% water is 17% calculated early, then
+% cave  : 15%
+% dirt  : 20%
 % forest: 25%
-% grass : 35%
+% grass : 40%
 terrainIs(_,_) :- checkStart, !.
-terrainIs(X, cave)   :- X < 10, !.
-terrainIs(X, water)  :- X < 25, !.
-terrainIs(X, dirt)   :- X < 40, !.
-terrainIs(X, forest) :- X < 65, !.
+terrainIs(X, cave)   :- X < 15, !.
+terrainIs(X, dirt)   :- X < 35, !.
+terrainIs(X, forest) :- X < 60, !.
 terrainIs(X, grass)  :- X < 100, !.

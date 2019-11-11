@@ -24,7 +24,6 @@ isEmpty([_|_], false).
 
 checkInvalidInput(X) :-
   \+ atom(X),
-  write(X),
   write('Please enter a valid name!'), nl,
   !.
 
@@ -57,6 +56,8 @@ assertFromFile(Stream, [H|T]) :-
 
 reloadGame(FileName) :-
   retractall(at(_,_,_)),
+  retractall(point(_,_,_)),
+  retractall(playerName(_)),
   retractall(enemy(_)),
   retractall(myToke(_)),
   retractall(tokemon(_,_,_,_,_,_,_,_,_)),
@@ -65,3 +66,39 @@ reloadGame(FileName) :-
   open(FileName, read, Stream),
   assertFromFile(Stream, _),
   close(Stream).
+
+saveGame(_) :- checkStart, !.
+saveGame(FileName) :-
+  open(FileName, write, Stream),
+  \+ loopWrite(Stream),
+  close(Stream),
+  format('Your game has been saved to ~a', [FileName]), nl,
+  !.
+
+loopWrite(_) :- checkStart, !.
+loopWrite(Stream) :-
+  playerName(Name),
+  write(Stream, playerName(Name)), write(Stream,'.'), nl(Stream),
+  fail.
+
+loopWrite(Stream) :-
+  myToke(MyToke),
+  write(Stream, myToke(MyToke)), write(Stream,'.'), nl(Stream),
+  fail.
+
+loopWrite(Stream) :-
+  point(Terrain, R, C),
+  write(Stream, point(Terrain, R, C)), write(Stream,'.'), nl(Stream),
+  fail.
+
+loopWrite(Stream) :-
+  at(X, R, C),
+  (X is player; X is gym; X is pagar),
+  write(Stream, at(X, R, C)), write(Stream,'.'), nl(Stream),
+  fail.
+
+/*** LOADLOCAL - Loading game state from a chosen file ***/
+loadGame(_) :- checkStart, !.
+loadGame(FileName) :-
+  reloadGame(FileName),
+  format('Your game from ~a has been loaded.', [FileName]), nl.

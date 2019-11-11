@@ -10,11 +10,21 @@ generateMap :-
 	R is Row//2, C is Col//2,
 	asserta(point(dirt, R, C)),
 	asserta(at(dirt, R, C)),
-	NumPoint is floor(Row/8*Col/8),
+	NumPoint is floor(Row/11*Col/11),
+	NumWater is floor(NumPoint/5)+1,
+	generateWater(NumWater),
 	generateTerrain(NumPoint),
 	placeTerrain(1,1),
 	placeBuildings,
 	!.
+
+generateWater(_) :- checkStart, !.
+generateWater(0).
+generateWater(N) :-
+	generatePoint(water),
+	NMin is N-1,
+	!,
+	generateWater(NMin).
 
 %%% generateTerrain/1
 % menghasilkan N sumber terrain random
@@ -39,11 +49,10 @@ generatePoint(Terrain) :-
 	repeat,
 		random(1, RowPlus, R),
 		random(1, ColPlus, C),
-		(	noPointAround(R, C)
+		(	validPoint(Terrain, R, C)
 		->	!,
 			asserta(point(Terrain, R, C)),
 			asserta(at(Terrain, R, C))
-		;	true
 		).
 
 %%% generateFence/1
@@ -102,9 +111,9 @@ placeBuildings :-
 	R is Row//2, C is Col//2,
 	retract(at(_, R, C)),
 	asserta(at(player, R, C)),
-	NumFence is floor(Row/13*Col/13)+1,
+	NumFence is floor(Row/20*Col/20)+1,
 	generateFence(NumFence),
-	NumGym is floor(Row/9*Col/9)+1,
+	NumGym is floor(Row/15*Col/15)+1,
 	generateGym(NumGym),
 	!.
 

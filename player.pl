@@ -1,22 +1,22 @@
 playerName(_) :- checkStart, !.
-playerName('Ahadi').
 
 initPlayer :- checkStart, !.
 initPlayer :-
 	repeat,
 		write('Enter your name: '),
 		read(Name),
-		(	\+ invalidName(Name) -> (
+		(	(isValid(Name, X), X == valid) -> (
 				!,
-				retract(playerName(_)),
+				retractall(playerName(_)),
 				asserta(playerName(Name)),
 				format('Woww, nice name! \nWelcome ~a to this wonderful World of Tokemon!...', [Name]), nl, nl
 			)
-		),
-		!.
+		).
 
-invalidName(_) :- checkStart, !.
-invalidName(Name) :- checkInvalidInput(Name), !.
+isValid(_,_) :- checkStart, !.
+isValid(Name, invalid) :- Name == end_of_file, !.
+isValid(Name,invalid) :- checkInvalidInput(Name), !.
+isValid(_, valid).
 
 status :- checkStart, !.
 status :-

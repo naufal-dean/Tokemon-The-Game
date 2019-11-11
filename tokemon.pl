@@ -8,6 +8,19 @@ tokeData(annamon,120,water,17,'tsunami',35,0,5).
 tokeData(deanmon,85,fire,23,'fire breath',45,0,5).
 tokeData(hadimon,95,dark,17,'black hole',60,0,5).
 tokeData(doraemon,93,light,18,'kantong ajaib',50,0,5).
+tokeData(kindermon,90,neutral,19,'chocho egg',55,0,5).
+tokeData(ekomon,110,leaves,21,'green shoot',30,0,5).
+tokeData(coremon,94,light,18,'core bang',52,0,5).
+tokeData(redomon,83,fire,22,'red flow',40,0,5).
+tokeData(flodomon,125,water,19,'super water',30,0,5).
+tokeData(branchomon,105,leaves,21,'winter attack',42,0,5).
+tokeData(terimon,123,water,16,'salt combo',34,0,5).
+tokeData(bluemon,84,fire,20,'fire blue',43,0,5).
+tokeData(devilomon,90,dark,18,'hell boy',58,0,5).
+tokeData(sunomon,91,light,17,'uv brust',55,0,5).
+tokeData(hakimomon,92,neutral,18,'truth hammer',54,0,5).
+
+
 
 /* Normal */
 tokeData(insectmon,25,leaves,5,'acid blue',10,0,1).
@@ -16,6 +29,15 @@ tokeData(chillmon,20,fire,6,'warm candy',12,0,1).
 tokeData(phillipmon,22,light,4,'white lamp',17,0,1).
 tokeData(gelapmon,24,dark,3,'electric die',18,0,1).
 tokeData(flatmon,25,neutral,4,'flatt!!!',11,0,1).
+tokeData(orizamon,26,leaves,5,'yellow rice',9,0,1).
+tokeData(icelemon,32,water,6,'cold acid',7,0,1).
+tokeData(papermon,23,fire,5,'choked',10,0,1).
+tokeData(magentamon,21,light,5,'color nail',16,0,1).
+tokeData(trashmon,25,dark,4,'garbage cube',17,0,1).
+tokeData(blokmon,23,neutral,3,'fire freedom',10,0,1).
+
+
+
 grassEnemies([insectmon, gelapmon]).
 dirtEnemies([insectmon, gelapmon, phillipmon, chillmon]).
 waterEnemies([waterlemon, phillipmon]).

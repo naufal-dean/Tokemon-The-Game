@@ -62,10 +62,19 @@ reloadGame(FileName) :-
   retractall(myToke(_)),
   retractall(tokemon(_,_,_,_,_,_,_,_,_)),
   retractall(healUsed(_)),
+  retractall(battleStarted(_)),
+  asserta(battleStarted(no)),
+  retractall(encounter(_)),
+  asserta(encounter(no)),
+  retractall(activeToke(_,_)),
+  asserta(activeToke(none,no)),
+  retractall(enemyToke(_,_,_,_,_,_,_,_,_)),
+  asserta(enemyToke(none,0,type,0,skill,0,0,0,no)),
 
   open(FileName, read, Stream),
   assertFromFile(Stream, _),
-  close(Stream).
+  close(Stream),
+  placeTerrain.
 
 saveGame(_) :- checkStart, !.
 saveGame(FileName) :-
@@ -93,7 +102,7 @@ loopWrite(Stream) :-
 
 loopWrite(Stream) :-
   at(X, R, C),
-  (X is player; X is gym; X is pagar),
+  (X == player; X == gym; X == pagar),
   write(Stream, at(X, R, C)), write(Stream,'.'), nl(Stream),
   fail.
 

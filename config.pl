@@ -16,8 +16,8 @@ command(specialAttack).
 command(capture).
 command(pick(_)).
 command(heal).
-command(saveGame/1).
-command(loadGame/1).
+command(saveGame(_)).
+command(loadGame(_)).
 
 % ============================== MAP ==============================
 mapSize(30, 30).

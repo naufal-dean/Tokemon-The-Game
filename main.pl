@@ -52,4 +52,5 @@ quit :-
     quitGameMsg,
     retract(gameStarted(yes)),
     asserta(gameStarted(no)),
-    reloadGame('initgame.pl').
+    reloadGame('initgame.pl'),
+    !, abort, fail.

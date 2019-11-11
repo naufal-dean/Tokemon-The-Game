@@ -56,6 +56,9 @@ assertFromFile(Stream, [H|T]) :-
 
 reloadGame(FileName) :-
   retractall(at(_,_,_)),
+  reloadGameUtil(FileName).
+
+reloadGameUtil(FileName) :-
   retractall(point(_,_,_)),
   retractall(playerName(_)),
   retractall(enemy(_)),
@@ -73,8 +76,7 @@ reloadGame(FileName) :-
 
   open(FileName, read, Stream),
   assertFromFile(Stream, _),
-  close(Stream),
-  placeTerrain.
+  close(Stream).
 
 saveGame(_) :- checkStart, !.
 saveGame(FileName) :-
@@ -110,4 +112,6 @@ loopWrite(Stream) :-
 loadGame(_) :- checkStart, !.
 loadGame(FileName) :-
   reloadGame(FileName),
+  placeTerrain,
+  reloadGameUtil(FileName),
   format('Your game from ~a has been loaded.', [FileName]), nl.

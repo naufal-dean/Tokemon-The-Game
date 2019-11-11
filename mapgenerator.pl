@@ -14,7 +14,7 @@ generateMap :-
 	NumWater is floor(NumPoint/5)+1,
 	generateWater(NumWater),
 	generateTerrain(NumPoint),
-	placeTerrain(1,1),
+	placeTerrain,
 	placeBuildings,
 	!.
 
@@ -97,13 +97,18 @@ generateGym(N) :-
 			)
 		).
 
-placeTerrain(_,_) :- checkStart, !.
-placeTerrain(R, C) :-
+placeTerrain :- checkStart, !.
+placeTerrain :-
+	placeTerrainUtil(1,1),
+	!.
+
+placeTerrainUtil(_,_) :- checkStart, !.
+placeTerrainUtil(R, C) :-
 	nextRC(R, C, RNext, CNext),
 	closestPointFrom(R, C, Terrain, _, _),
 	asserta(at(Terrain, R, C)),
-	placeTerrain(RNext, CNext).
-placeTerrain(_,_).
+	placeTerrainUtil(RNext, CNext).
+placeTerrainUtil(_,_).
 
 placeBuildings :- checkStart, !.
 placeBuildings :-

@@ -20,8 +20,6 @@ tokeData(devilomon,90,dark,18,'hell boy',58,0,5).
 tokeData(sunomon,91,light,17,'uv brust',55,0,5).
 tokeData(hakimomon,92,neutral,18,'truth hammer',54,0,5).
 
-
-
 /* Normal */
 tokeData(insectmon,25,leaves,5,'acid blue',10,0,1).
 tokeData(waterlemon,30,water,4,'sweet seed',8,0,1).
@@ -36,11 +34,11 @@ tokeData(magentamon,21,light,5,'color nail',16,0,1).
 tokeData(trashmon,25,dark,4,'garbage cube',17,0,1).
 tokeData(blokmon,23,neutral,3,'fire freedom',10,0,1).
 
-
-
 grassEnemies([insectmon, gelapmon]).
 dirtEnemies([insectmon, gelapmon, phillipmon, chillmon]).
 waterEnemies([waterlemon, phillipmon]).
+caveEnemies([]).
+forestEnemies([]).
 
 % owned tokemon
 % tokemon/9

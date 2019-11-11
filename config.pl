@@ -16,6 +16,7 @@ command(specialAttack).
 command(capture).
 command(pick(_)).
 command(heal).
+command(trace).
 
 % ============================== MAP ==============================
 mapSize(20, 20).

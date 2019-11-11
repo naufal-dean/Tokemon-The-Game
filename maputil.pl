@@ -62,6 +62,7 @@ validGymPos(R, C) :-
 	(
 		at(water, R, C);
 		at(cave, R, C);
+		at(player, R, C);
 		(
 			closestBuildingFrom(R, C, gym, RB, CB, gym),
 			dist(R, C, RB, CB, Dist),
@@ -74,8 +75,11 @@ validGymPos(_,_).
 validFencePos(_,_,_,_) :- checkStart, !.
 validFencePos(R1, C1, R2, C2) :-
 	(
-		R1 is R2;
-		C1 is C2
+		(R1 is R2, C1 is C2);
+		(
+			at(player, RP, CP),
+			(R1 is RP; R2 is RP; C1 is CP; C2 is CP)
+		)
 	),
 	!, false.
 validFencePos(_,_,_,_).

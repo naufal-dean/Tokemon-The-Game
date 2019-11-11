@@ -71,3 +71,17 @@ countFromList([], 0).
 countFromList([_|T], N) :-
 	countFromList(T, N2),
 	N is N2+1.
+
+getMaxLvToke(_,_) :- checkStart, !.
+getMaxLvToke([Toke|[]],MxLv) :-
+	getLevel(Toke,MxLv),
+	!.
+getMaxLvToke([Toke|MyToke],MxLv) :-
+	getLevel(Toke,Level1),
+	getMaxLvToke(MyToke,Level2),
+	Level1 > Level2,
+	MxLv is Level1,
+	!.
+getMaxLvToke([_|MyToke],MxLv) :-
+	getMaxLvToke(MyToke,MxLv),
+	!.

@@ -22,10 +22,36 @@ run :- checkStart, !.
 run :- checkBattle(no), !.
 run :- checkDefeat, !.
 run :-
+	encounter(no),
+	activeToke(none, no),
+	write('You can\'t run right now'), nl,
+	write('Choose your tokemon using pick(tokemon_name).'), nl,
+	!.
+run :-
+	myToke(MyToke),
+	getMaxLvToke(MyToke,OurLevel),
+	enemyToke(_,_,_,_,_,_,_,EnemyLevel,_),
+	EnemyLevel >= OurLevel,
+	MaxRand is ((EnemyLevel - OurLevel) * 3) + 8,
+	random(0,MaxRand,X),
+	runHelper(X),
+	!.
+run :-
+	random(0,5,X),
+	runHelper(X),
+	!.
+
+runHelper(_) :- checkStart, !.
+runHelper(X) :-
+	X < 4,
 	retractall(encounter(_)),
 	asserta(encounter(no)),
 	write('You fled from the battle...'), nl,
 	endBattle,
+	!.
+runHelper(_) :-
+	write('The enemy won\'t let you go!'), nl,
+	fight,
 	!.
 
 pick(_) :- checkStart, !.

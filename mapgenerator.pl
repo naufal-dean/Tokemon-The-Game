@@ -10,12 +10,13 @@ generateMap :-
 	R is Row//2, C is Col//2,
 	asserta(point(dirt, R, C)),
 	asserta(at(dirt, R, C)),
-	NumPoint is floor(Row/11*Col/11),
-	NumWater is floor(NumPoint/5)+1,
+	NumPoint is floor(Row/10*Col/10),
+	NumWater is NumPoint,
 	generateWater(NumWater),
 	generateTerrain(NumPoint),
 	placeTerrain,
 	placeBuildings,
+	placeBorder,
 	!.
 
 generateWater(_) :- checkStart, !.
@@ -51,8 +52,7 @@ generatePoint(Terrain) :-
 		random(1, ColPlus, C),
 		(	validPoint(Terrain, R, C)
 		->	!,
-			asserta(point(Terrain, R, C)),
-			asserta(at(Terrain, R, C))
+			asserta(point(Terrain, R, C))
 		).
 
 %%% generateFence/1
@@ -118,7 +118,7 @@ placeBuildings :-
 	asserta(at(player, R, C)),
 	NumFence is floor(Row/20*Col/20)+1,
 	generateFence(NumFence),
-	NumGym is floor(Row/15*Col/15)+1,
+	NumGym is floor(Row/16*Col/16)+1,
 	generateGym(NumGym),
 	!.
 
@@ -130,3 +130,41 @@ placeFence(R1, C1, R2, C2) :-
 	retract(at(_, R2, C2)),
 	asserta(at(fence, R1, C1)),
 	asserta(at(fence, R2, C2)).
+
+placeBorder :- checkStart, !.
+placeBorder :-
+	placeBorderUtil(0,0),
+	!.
+
+placeBorderUtil(_,_) :- checkStart, !.
+placeBorderUtil(RNext, CNext) :-
+	mapSize(Row, Col),
+	RNext is Row + 1,
+	CNext is Col + 1,
+	asserta(at(fence, RNext, CNext)),
+	!.
+placeBorderUtil(R,CNext) :-
+	mapSize(_, Col),
+	CNext is Col+1,
+	RNext is R+1,
+	asserta(at(fence, R, CNext)),
+	!,
+	placeBorderUtil(RNext, 0).
+placeBorderUtil(0,C) :-
+	CNext is C + 1,
+	asserta(at(fence, 0, C)),
+	!,
+	placeBorderUtil(0, CNext).
+placeBorderUtil(RNext,C) :-
+	mapSize(Row, _),
+	RNext is Row + 1,
+	CNext is C + 1,
+	asserta(at(fence, RNext, C)),
+	!,
+	placeBorderUtil(RNext, CNext).
+placeBorderUtil(R, 0) :-
+	mapSize(_, Col),
+	CNext is Col + 1,
+	asserta(at(fence, R, 0)),
+	!,
+	placeBorderUtil(R, CNext).

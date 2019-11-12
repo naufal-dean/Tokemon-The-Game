@@ -2,13 +2,27 @@
 nextRC(_,_,_,_) :- checkStart, !.
 nextRC(RNext, _, _, _) :-
 	mapSize(Row, _),
-	RNext is Row +1,
+	RNext is Row+1,
 	!, fail.
 nextRC(R, Col, RNext,1) :-
 	mapSize(_, Col),
 	RNext is R+1,
 	!.
 nextRC(R, C, R, CNext) :-
+	CNext is C+1,
+	!.
+
+nextRCMap(_,_,_,_) :- checkStart, !.
+nextRCMap(RNext, _, _, _) :-
+	mapSize(Row, _),
+	RNext is Row+2,
+	!, fail.
+nextRCMap(R, CNext, RNext,0) :-
+	mapSize(_, Col),
+	CNext is Col+1,
+	RNext is R+1,
+	!.
+nextRCMap(R, C, R, CNext) :-
 	CNext is C+1,
 	!.
 
@@ -44,8 +58,8 @@ closestPointFrom(R, C, Terrain, RT, CT) :-
 validPoint(_,_,_) :- checkStart, !.
 validPoint(water, R, C) :-
 	mapSize(Row, Col),
-	((R =< floor(0.9*Row)), (R >= floor(0.1*Row))),
-	((C =< floor(0.9*Col)), (C >= floor(0.1*Col))),
+	((R =< floor(0.95*Row)), (R >= floor(0.05*Row))),
+	((C =< floor(0.95*Col)), (C >= floor(0.05*Col))),
 	!, fail.
 validPoint(water, R, C) :-
 	noPointAround(R, C),
@@ -53,8 +67,8 @@ validPoint(water, R, C) :-
 validPoint(_, R, C) :-
 	noPointAround(R, C),
 	mapSize(Row, Col),
-	((R >= floor(0.8*Row)); (R =< floor(0.2*Row))),
-	((C >= floor(0.8*Col)); (C =< floor(0.2*Col))),
+	((R >= floor(0.7*Row)); (R =< floor(0.3*Row))),
+	((C >= floor(0.7*Col)); (C =< floor(0.3*Col))),
 	!, fail.
 validPoint(_, R, C) :-
 	noPointAround(R, C),
@@ -94,14 +108,11 @@ validGymPos(_,_).
 
 validFencePos(_,_,_,_) :- checkStart, !.
 validFencePos(R1, C1, R2, C2) :-
-	(
-		(R1 is R2, C1 is C2);
-		(
-			at(player, RP, CP),
-			(R1 is RP; R2 is RP; C1 is CP; C2 is CP)
-		)
-	),
-	!, false.
+	R1 \== R2, C1 \== C2,
+	at(X, RP, CP),
+	X \== player, X \== water,
+	R1 \== RP, R2 \== RP,
+	C1 \== CP, C2 \== CP.
 validFencePos(_,_,_,_).
 
 % =========================== Terrain Chance ===========================

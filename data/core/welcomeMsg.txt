@@ -20,9 +20,9 @@
 |                       Welcome to the world of Tokemon!                         |
 |                                                                                |
 | It's a place where humans and Tokemons live together in peace. People catching |
-| Tokemons and take care of them as well. But, there're some Legendary Tokemons  |
-| hiding in this world. Those legendary Tokemons are very strong and dangerous!  |
-| They have a mission to dominate the world and destroy the human being!         |
+| Tokemons and taking care of them. But, there're some Legendary Tokemons hiding |
+| in this world. Those legendary Tokemons are very strong and dangerous! They    |
+| have a mission to dominate the world and destroy the human being!              |
 |                                                                                |
 | You're a Profesional Tokemon Trainer. You have a responsibility to capture all |
 | the Legendary Tokemon and save the world! Don't worry, at the begining of game,|

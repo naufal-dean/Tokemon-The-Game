@@ -26,7 +26,7 @@
 |                                                                                |
 | You're a Profesional Tokemon Trainer. You have a responsibility to capture all |
 | the Legendary Tokemon and save the world! Don't worry, at the begining of game,|
-| you'll be accompanied by a normal Tokemon. You can catch a lot of Tokemon,     |
+| you'll be accompanied by a normal Tokemon. You can catch a lot of Tokemons,    |
 | evolve them, and become stronger!                                              |
 |                                                                                |
 | Come on! Your time is limited! Good Luck!                                      |

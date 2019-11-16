@@ -34,11 +34,11 @@ tokeData(magentamon,21,light,5,'color nail',16,0,1).
 tokeData(trashmon,25,dark,4,'garbage cube',17,0,1).
 tokeData(blokmon,23,neutral,3,'fire freedom',10,0,1).
 
-grassEnemies([insectmon, gelapmon]).
-dirtEnemies([insectmon, gelapmon, phillipmon, chillmon]).
-waterEnemies([waterlemon, phillipmon]).
-caveEnemies([]).
-forestEnemies([]).
+grassEnemies([waterlemon, insectmon, orizamon, icelemon, magentamon, blokmon, flatmon, phillipmon]).
+dirtEnemies([insectmon, gelapmon, phillipmon, chillmon, flatmon, trashmon, blokmon]).
+waterEnemies([waterlemon, phillipmon, waterlemon, icelemon, icelemon, magentamon, blokmon]).
+caveEnemies([trashmon, trashmon, flatmon, chillmon, chillmon, gelapmon, gelapmon, papermon]).
+forestEnemies([gelapmon, insectmon, insectmon, flatmon, blokmon, orizamon, orizamon]).
 
 % owned tokemon
 % tokemon/9

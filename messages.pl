@@ -2,6 +2,9 @@
 welcomeMsg :-
 	readFile('data/core/welcomeMsg.txt').
 
+logoMsg :-
+  readFile('data/core/logoMsg.txt').
+
 help :-
 	readFile('data/core/help.txt').
 

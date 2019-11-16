@@ -104,7 +104,7 @@ loopWrite(Stream) :-
 
 loopWrite(Stream) :-
   at(X, R, C),
-  (X == player; X == gym; X == pagar),
+  (X == player; X == gym; X == fence),
   write(Stream, at(X, R, C)), write(Stream,'.'), nl(Stream),
   fail.
 

@@ -28,6 +28,7 @@
 :- include(gym).
 
 % =============================== Initialization ===============================
+:- initialization(logoMsg).
 :- initialization(startGameMsg).
 gameStarted(no).
 

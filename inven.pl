@@ -34,9 +34,8 @@ delTokemon(Nick) :-
 	asserta(myToke(NewToke)).
 
 delTokemonUtil(_,_,_) :- checkStart, !.
-delTokemonUtil([X|T], X, T).
-delTokemonUtil([H|T], X, L) :-
-	delTokemonUtil(T, X, [H|L]).
+delTokemonUtil(Old, X, New) :-
+	delete(Old, X, New).
 
 drop(_) :- checkStart, !.
 drop(X) :- checkInvalidInput(X), !.

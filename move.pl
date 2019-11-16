@@ -59,6 +59,7 @@ moveTo(RDest, CDest) :-
 	retract(moves(MoveCnt)),
 	MoveCntPlus is MoveCnt+1,
 	asserta(moves(MoveCntPlus)),
+	map,
 	calcChance(Chance),
 	triggerEnemy(Chance).
 

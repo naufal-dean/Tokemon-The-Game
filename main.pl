@@ -1,9 +1,9 @@
 % ======================= TOKEMON GAME - Kelas 3 Kelompok 5 =======================
 % dibuat untuk menyelesaikan tugas kuliah logika komputasional, oleh:
 %   - Jonathan Yudi Gunawan / 13518084
-%   - 
-%   - 
-%   - 
+%   - Naufal Dean Anugrah / 13518123
+%   - Anna Elvira Hartoyo / 13518045
+%   - Ahadi Ihsan Rasyidin / 13518006
 %
 % ================================================================================
 

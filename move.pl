@@ -107,9 +107,15 @@ enemiesOn(water, Enemies) :-
 enemiesOn(grass, Enemies) :-
 	grassEnemies(Enemies),
 	!.
-enemiesOn(_, Enemies) :-
-	dirtEnemies(Enemies).
-
+enemiesOn(cave, Enemies) :-
+	caveEnemies(Enemies),
+	!.
+enemiesOn(forest, Enemies) :-
+	forestEnemies(Enemies),
+	!.
+enemiesOn(dirt, Enemies) :-
+	dirtEnemies(Enemies),
+	!.
 
 getLandType(_) :- checkStart, !.
 getLandType(LandType) :-

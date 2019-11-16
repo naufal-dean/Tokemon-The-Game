@@ -142,7 +142,7 @@ isTokeLost(Toke) :-
 isTokeLost(_).
 
 uniqueNick(_) :- checkStart, !, fail.
-uniqueNick(X) :- checkValidInput(X), !, fail.
+uniqueNick(X) :- checkInvalidInput(X), !, fail.
 uniqueNick(Nick) :-
 	myToke(MyToke),
 	searchInven(MyToke, Nick),

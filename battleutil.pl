@@ -45,10 +45,10 @@ checkActiveToke :-
 
 checkDefeat :- checkStart, !.
 checkDefeat :-
-	enemyToke(Enemy,HP,_,_,_,_,_,_,_),
-	HP =< 0,
+	enemyToke(Enemy,EnemyHP,_,_,_,_,_,_,_),
+	EnemyHP =< 0,
 	format('~a has been defeated!', [Enemy]), nl,
-	write('Capture it or Move around to end the battle.'), nl,
+	write('Capture it or Move around to end the battle.'), nl, nl,
 	!.
 
 attackModifier(_,_,_) :- checkStart, !.
@@ -63,7 +63,7 @@ attackModifier(weak,water,leaves) :- !.
 attackModifier(normal,_,_) :- !.
 
 enemyTurn :- checkStart, !.
-enemyTurn :- checkDefeat, !.
+enemyTurn :- nl, checkDefeat, !.
 enemyTurn :-
 	nl, write('Enemy\'s turn...'), nl,
 	random(0,4,X),

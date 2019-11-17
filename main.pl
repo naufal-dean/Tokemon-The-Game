@@ -26,6 +26,7 @@
 :- include(battle).
 :- include(battleutil).
 :- include(gym).
+:- include(evolve).
 
 % =============================== Initialization ===============================
 :- initialization(logoMsg).

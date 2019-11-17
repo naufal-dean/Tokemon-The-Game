@@ -18,6 +18,7 @@ command(pick(_)).
 command(heal).
 command(saveGame(_)).
 command(loadGame(_)).
+command(evolve(_)).
 
 % ============================== MAP ==============================
 mapSize(30, 30).

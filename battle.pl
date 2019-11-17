@@ -167,7 +167,16 @@ capture :-
 				!,
 				enemyToke(Enemy,_,_,_,_,_,_,_,_),
 				addTokemon(Nick, Enemy),
-				format('~a is captured!', [Nick]), nl,
+				format('~a is captured!', [Nick]), nl, nl,
+
+				activeToke(Toke,_),
+				killXP(Enemy,PlusExp),
+				retract(tokemon(Toke,Name,HP,Type,Att,Skill,SkillDmg,Exp,Level)),
+				NewExp is Exp + PlusExp,
+				asserta(tokemon(Toke,Name,HP,Type,Att,Skill,SkillDmg,NewExp,Level)),
+				format('~a gained ~w exp...', [Toke,PlusExp]), nl,
+				levelUp(Toke),
+
 				endBattle
 			) ; (
 				write(Nick), write(' has been taken.'), nl,

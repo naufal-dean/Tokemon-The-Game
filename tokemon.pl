@@ -8,17 +8,17 @@ tokeData(annamon,120,water,17,'tsunami',35,0,5).
 tokeData(deanmon,85,fire,23,'fire breath',45,0,5).
 tokeData(hadimon,95,dark,17,'black hole',60,0,5).
 tokeData(doraemon,93,light,18,'kantong ajaib',50,0,5).
-tokeData(kindermon,90,neutral,19,'chocho egg',55,0,5).
-tokeData(ekomon,110,leaves,21,'green shoot',30,0,5).
-tokeData(coremon,94,light,18,'core bang',52,0,5).
-tokeData(redomon,83,fire,22,'red flow',40,0,5).
-tokeData(flodomon,125,water,19,'super water',30,0,5).
-tokeData(branchomon,105,leaves,21,'winter attack',42,0,5).
-tokeData(terimon,123,water,16,'salt combo',34,0,5).
-tokeData(bluemon,84,fire,20,'fire blue',43,0,5).
-tokeData(devilomon,90,dark,18,'hell boy',58,0,5).
-tokeData(sunomon,91,light,17,'uv brust',55,0,5).
-tokeData(hakimomon,92,neutral,18,'truth hammer',54,0,5).
+% tokeData(kindermon,90,neutral,19,'chocho egg',55,0,5).
+% tokeData(ekomon,110,leaves,21,'green shoot',30,0,5).
+% tokeData(coremon,94,light,18,'core bang',52,0,5).
+% tokeData(redomon,83,fire,22,'red flow',40,0,5).
+% tokeData(flodomon,125,water,19,'super water',30,0,5).
+% tokeData(branchomon,105,leaves,21,'winter attack',42,0,5).
+% tokeData(terimon,123,water,16,'salt combo',34,0,5).
+% tokeData(bluemon,84,fire,20,'fire blue',43,0,5).
+% tokeData(devilomon,90,dark,18,'hell boy',58,0,5).
+% tokeData(sunomon,91,light,17,'uv brust',55,0,5).
+% tokeData(hakimomon,92,neutral,18,'truth hammer',54,0,5).
 
 /* Normal */
 tokeData(insectmon,25,leaves,5,'acid blue',10,0,1).

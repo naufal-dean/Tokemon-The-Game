@@ -50,8 +50,13 @@ runHelper(X) :-
 	endBattle,
 	!.
 runHelper(_) :-
+	encounter(yes),
 	write('The enemy won\'t let you go!'), nl,
 	fight,
+	!.
+runHelper(_) :-
+	write('The enemy won\'t let you go!'), nl,
+	enemyTurn,
 	!.
 
 pick(_) :- checkStart, !.

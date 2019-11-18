@@ -83,6 +83,14 @@ levelUp(Nick) :-
 levelUp(Nick) :-
   getLevel(Nick,Level),
   Level == 5,
+  getName(Nick,Name),
+  evolveData(_,Name,_,_,_,_,_,_,_),
+  write('The earth is rumbling...'), nl,
+  format('~a reached maximum strength...', [Nick]), nl,
+  !.
+levelUp(Nick) :-
+  getLevel(Nick,Level),
+  Level == 5,
   format('~a looks stronger than ever...', [Nick]), nl,
   write('You can evolve your Tokemon using evolve(tokemon_nick)'), nl,
   !.
@@ -103,10 +111,15 @@ expLimit(3,15).
 expLimit(4,20).
 expLimit(5,999).
 
-/* Evolve, checkInvalidInput?? */
+/* Evolve */
 evolve(_) :- checkStart, !.
 evolve(_) :- checkBattle(yes), !.
 evolve(X) :- checkInvalidInput(X), !.
+evolve(Nick) :-
+  getName(Nick,Name),
+  evolveData(_,Name,_,_,_,_,_,_,_),
+  format('You can not evolve ~a anymore!', [Nick]), nl,
+  !.
 evolve(Nick) :-
   getLevel(Nick,Level),
   Level < 5,

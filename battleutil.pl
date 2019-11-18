@@ -21,6 +21,30 @@ endBattle :-
 	retractall(enemyToke(_,_,_,_,_,_,_,_,_)),
 	asserta(enemyToke(none,0,type,0,skill,0,0,0,no)).
 
+afterMath :- checkStart, !.
+afterMath :-
+	activeToke(Toke,_),
+	( (getLevel(Toke,Level), Level < 5) -> (
+			enemyToke(Enemy,_,_,_,_,_,_,_,_),
+			killXP(Enemy,PlusExp),
+			retract(tokemon(Toke,Name,HP,Type,Att,Skill,SkillDmg,Exp,Level)),
+			NewExp is Exp + PlusExp,
+			asserta(tokemon(Toke,Name,HP,Type,Att,Skill,SkillDmg,NewExp,Level)),
+			format('~a gained ~w exp...', [Toke,PlusExp]), nl,
+			levelUp(Toke)
+		) ; (
+			format('~a has maximum exp...', [Toke]), nl
+		)
+	),
+	( (enemy(EnemyToke), searchInven(EnemyToke,Enemy)) -> (
+			delTokemonUtil(EnemyToke, Enemy, NewEnemyToke),
+			retract(enemy(_)),
+			asserta(enemy(NewEnemyToke))
+		) ; (
+			true
+		)
+	).
+
 checkBattle(_) :- checkStart, !.
 checkBattle(no) :-
 	battleStarted(no),
@@ -75,7 +99,7 @@ enemyTurn :-
 
 	write('Your toke:'), nl,
 	showBattleStats(Nick, OurHP, OurType, OurSkillStts), nl,
-	
+
 	write('Enemy toke:'), nl,
 	showBattleStats(Enemy, EnemyHP, EnemyType, EnemySkillStts),
 	!.

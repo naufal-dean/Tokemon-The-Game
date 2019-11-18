@@ -17,17 +17,9 @@ movePlayer(_,_) :-
 	!.
 movePlayer(DeltaR, DeltaC) :-
 	battleStarted(yes),
-	enemyToke(Enemy,EnemyHP,_,_,_,_,_,_,_),
+	enemyToke(_,EnemyHP,_,_,_,_,_,_,_),
 	EnemyHP =< 0,
-
-	activeToke(Toke,_),
-	killXP(Enemy,PlusExp),
-	retract(tokemon(Toke,Name,HP,Type,Att,Skill,SkillDmg,Exp,Level)),
-	NewExp is Exp + PlusExp,
-	asserta(tokemon(Toke,Name,HP,Type,Att,Skill,SkillDmg,NewExp,Level)),
-	format('~a gained ~w exp...', [Toke,PlusExp]), nl,
-	levelUp(Toke), nl,
-
+	afterMath, nl,
 	endBattle,
 	write('You left the battlefield...'), nl,
 	movePlayer(DeltaR, DeltaC),

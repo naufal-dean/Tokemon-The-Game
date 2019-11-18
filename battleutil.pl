@@ -25,8 +25,8 @@ endBattle :-
 afterMath :- checkStart, !.
 afterMath :-
 	activeToke(Toke,_),
+	enemyToke(Enemy,_,_,_,_,_,_,_,_),
 	( (getLevel(Toke,Level), Level < 5) -> (
-			enemyToke(Enemy,_,_,_,_,_,_,_,_),
 			killXP(Enemy,PlusExp),
 			retract(tokemon(Toke,Name,HP,Type,Att,Skill,SkillDmg,Exp,Level)),
 			NewExp is Exp + PlusExp,

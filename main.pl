@@ -9,7 +9,7 @@
 
 % =============================== Dynamic Variables ===============================
 :- dynamic(gameStarted/1, at/3, enemy/1, myToke/1, playerName/1, moves/1, point/3).
-:- dynamic(battleStarted/1, encounter/1, activeToke/2, enemyToke/9, tokemon/9, healUsed/1).
+:- dynamic(battleStarted/1, encounter/1, activeToke/2, enemyToke/9, tokemon/9, healUsed/1, healCooldown/1).
 
 % ================================= Dependencies =================================
 :- include(initgame).

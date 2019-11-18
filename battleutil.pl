@@ -8,7 +8,8 @@ initBattle(Enemy) :-
 	retractall(enemyToke(_,_,_,_,_,_,_,_,_)),
 	tokeData(Enemy,HP,Type,Damage,Skill,SkillDmg,Exp,Level),
 	asserta(enemyToke(Enemy,HP,Type,Damage,Skill,SkillDmg,Exp,Level,yes)),
-	format('A wild Tokemon appears! It is ~a...', [Enemy]), nl,
+	format('A wild Tokemon appears! It is ~a...\n\n', [Enemy]),
+	format('Health: ~w\nType: ~w\nDamage: ~w\nLevel: ~w\n\n', [HP, Type, Damage, Level]),
 	write('Fight or Run?'), nl,
 	!.
 
@@ -40,6 +41,12 @@ afterMath :-
 			delTokemonUtil(EnemyToke, Enemy, NewEnemyToke),
 			retract(enemy(_)),
 			asserta(enemy(NewEnemyToke))
+		) ; (
+			true
+		)
+	),
+	( (healUsed(yes)) -> (
+			healCooldownUpdate
 		) ; (
 			true
 		)

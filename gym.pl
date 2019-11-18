@@ -26,8 +26,8 @@ healAll(_) :- checkStart, !.
 healAll([]).
 healAll([Nick|T]) :-
 	tokemon(Nick,Name,Hp,Type,Att,Skill,SkillDmg,Exp,Level),
-	tokeData(Name,MaxHp,_,_,_,_,_,_),
-	NewHp is MaxHp + Level * 1,
+	tokeData(Name,BaseHp,_,_,_,_,_,_),
+	scaleMaxHP(BaseHp,Level,NewHp),
 	retract(tokemon(Nick,Name,Hp,Type,Att,Skill,SkillDmg,Exp,Level)),
 	asserta(tokemon(Nick,Name,NewHp,Type,Att,Skill,SkillDmg,Exp,Level)),
 	healAll(T),

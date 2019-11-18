@@ -65,16 +65,16 @@ evolveData(blokmon,blokmonZ,69,neutral,3,'fire freedom super',10,0,1).
 levelUp(_) :- checkStart, !.
 levelUp(Nick) :-
   getExp(Nick,Exp),
-  Exp >= 15,
+  Exp >= 2,
   getLevel(Nick,Level),
   Level < 5,
   retract(tokemon(Nick,Name,_,Type,Att,Skill,SkillDmg,_,_)),
-  tokeData(Name,MaxHP,_,_,_,_,_,_),
-  NewHP is MaxHP + ceiling(MaxHP * 0.3),
+  tokeData(Name,BaseHP,_,_,_,_,_,_),
   NewAtt is Att + ceiling(Att * 0.25),
   NewSkillDmg is SkillDmg + ceiling(SkillDmg * 0.3),
   NewLevel is Level + 1,
-  NewExp is Exp - 15,
+  NewExp is Exp - 2,
+  scaleMaxHP(BaseHP,NewLevel,NewHP),
   asserta(tokemon(Nick,Name,NewHP,Type,NewAtt,Skill,NewSkillDmg,NewExp,NewLevel)),
   format('~a grew to level ~w!!!', [Nick,NewLevel]), nl,
   levelUp(Nick),
@@ -86,6 +86,14 @@ levelUp(Nick) :-
   write('You can evolve your Tokemon using evolve(tokemon_nick)'), nl,
   !.
 levelUp(_).
+
+scaleMaxHP(_,_,_) :- checkStart, !.
+scaleMaxHP(BaseHP,1,BaseHP).
+scaleMaxHP(BaseHP,Level,NewHP) :-
+  MidHP is BaseHP + ceiling(BaseHP * 0.3),
+  MidLv is Level - 1,
+  scaleMaxHP(MidHP,MidLv,NewHP),
+  !.
 
 /* Evolve, checkInvalidInput?? */
 evolve(_) :- checkStart, !.

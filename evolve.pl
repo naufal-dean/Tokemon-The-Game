@@ -76,7 +76,12 @@ levelUp(Nick) :-
   Exp >= ExpLimit,
   Level < 5,
   retract(tokemon(Nick,Name,_,Type,Att,Skill,SkillDmg,_,_)),
-  tokeData(Name,BaseHP,_,_,_,_,_,_),
+  ( (tokeData(Name,_,_,_,_,_,_,_)) -> (
+      tokeData(Name,BaseHP,_,_,_,_,_,_)
+    ) ; (
+      evolveData(_,Name,BaseHP,_,_,_,_,_,_)
+    )
+  ),
   NewAtt is Att + ceiling(Att * 0.25),
   NewSkillDmg is SkillDmg + ceiling(SkillDmg * 0.3),
   NewLevel is Level + 1,

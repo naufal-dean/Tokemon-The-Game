@@ -15,9 +15,7 @@ initPlayer :-
 
 initToke :- checkStart, !.
 initToke :-
-	write('There are three Tokemon in front of you...'), nl,
-	write('insectmon, waterlemon, chillmon'), nl,
-	write('You can choose one...'), nl,
+	initTokeMsg,
 	repeat,
 		write('Enter the Tokemon name: '),
 		read(Name),
@@ -58,7 +56,7 @@ isTokeValid(Name,valid) :-
 	Name == chillmon,
 	!.
 isTokeValid(_,invalid) :-
-	write('Please choose one from these three Tokemon...'), nl,
+	write('Please choose one from these three Tokemon!'), nl,
 	!.
 
 status :- checkStart, !.

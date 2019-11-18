@@ -5,6 +5,9 @@ welcomeMsg :-
 logoMsg :-
   readFile('data/core/logoMsg.txt').
 
+initTokeMsg :-
+	readFile('data/core/initTokeMsg.txt').
+
 help :-
 	readFile('data/core/help.txt').
 

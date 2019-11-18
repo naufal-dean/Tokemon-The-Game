@@ -8,17 +8,6 @@ tokeData(annamon,120,water,17,'tsunami',35,15,5).
 tokeData(deanmon,85,fire,23,'fire breath',45,15,5).
 tokeData(hadimon,95,dark,17,'black hole',60,15,5).
 tokeData(doraemon,93,light,18,'kantong ajaib',50,15,5).
-% tokeData(kindermon,90,neutral,19,'chocho egg',55,0,5).
-% tokeData(ekomon,110,leaves,21,'green shoot',30,0,5).
-% tokeData(coremon,94,light,18,'core bang',52,0,5).
-% tokeData(redomon,83,fire,22,'red flow',40,0,5).
-% tokeData(flodomon,125,water,19,'super water',30,0,5).
-% tokeData(branchomon,105,leaves,21,'winter attack',42,0,5).
-% tokeData(terimon,123,water,16,'salt combo',34,0,5).
-% tokeData(bluemon,84,fire,20,'fire blue',43,0,5).
-% tokeData(devilomon,90,dark,18,'hell boy',58,0,5).
-% tokeData(sunomon,91,light,17,'uv brust',55,0,5).
-% tokeData(hakimomon,92,neutral,18,'truth hammer',54,0,5).
 
 /* Normal */
 tokeData(insectmon,25,leaves,5,'acid blue',10,0,1).
@@ -33,12 +22,23 @@ tokeData(papermon,23,fire,5,'choked',10,0,1).
 tokeData(magentamon,21,light,5,'color nail',16,0,1).
 tokeData(trashmon,25,dark,4,'garbage cube',17,0,1).
 tokeData(blokmon,23,neutral,3,'fire freedom',10,0,1).
+tokeData(kindermon,28,neutral,9,'chocho egg',15,0,1).
+tokeData(ekomon,32,leaves,9,'green shoot',13,0,1).
+tokeData(coremon,29,light,8,'core bang',15,0,1).
+tokeData(redomon,30,fire,9,'red flow',14,0,1).
+tokeData(flodomon,35,water,7,'super water',14,0,1).
+tokeData(branchomon,31,leaves,8,'winter attack',16,0,1).
+tokeData(terimon,34,water,7,'salt combo',13,0,1).
+tokeData(bluemon,28,fire,8,'fire blue',17,0,1).
+tokeData(devilomon,28,dark,8,'hell boy',17,0,1).
+tokeData(sunomon,27,light,9,'uv brust',17,0,1).
+tokeData(hakimomon,29,neutral,8,'truth hammer',18,0,1).
 
-grassEnemies([waterlemon, insectmon, orizamon, icelemon, magentamon, blokmon, flatmon, phillipmon]).
-dirtEnemies([insectmon, gelapmon, phillipmon, chillmon, flatmon, trashmon, blokmon]).
-waterEnemies([waterlemon, phillipmon, waterlemon, icelemon, icelemon, magentamon, blokmon]).
-caveEnemies([trashmon, trashmon, flatmon, chillmon, chillmon, gelapmon, gelapmon, papermon]).
-forestEnemies([gelapmon, insectmon, insectmon, flatmon, blokmon, orizamon, orizamon]).
+grassEnemies([waterlemon, insectmon, orizamon, icelemon, magentamon, blokmon, flatmon, phillipmon, kindermon, coremon, branchomon, bluemon, hakimomon]).
+dirtEnemies([insectmon, gelapmon, phillipmon, chillmon, flatmon, trashmon, blokmon, kindermon, redomon, branchomon, devilomon]).
+waterEnemies([waterlemon, phillipmon, waterlemon, icelemon, icelemon, magentamon, blokmon, ekomon, redomon, terimon, devilomon]).
+caveEnemies([trashmon, trashmon, flatmon, chillmon, chillmon, gelapmon, gelapmon, papermon, ekomon, flodomon, terimon, sunomon]).
+forestEnemies([gelapmon, insectmon, insectmon, flatmon, blokmon, orizamon, orizamon, coremon, flodomon, bluemon, sunomon, hakimomon]).
 
 % owned tokemon
 % tokemon/9

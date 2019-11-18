@@ -61,8 +61,14 @@ isTokeValid(_,invalid) :-
 
 status :- checkStart, !.
 status :-
-	write('Your Tokemon:'), nl, showMyTokes,
-	write('Your Enemy:'), nl, showEnemies,
+	write('|===================|'), nl,
+	write('|   Your Tokemon:   |'), nl,
+	write('|-------------------|'), nl,
+	showMyTokes,
+	write('|===================|'), nl,
+	write('|    Your Enemy:    |'), nl,
+	write('|-------------------|'), nl,
+	showEnemies,
 	!.
 
 checkCond :- checkStart, !.

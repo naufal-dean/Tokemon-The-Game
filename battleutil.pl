@@ -89,7 +89,7 @@ attackModifier(normal,_,_) :- !.
 enemyTurn :- checkStart, !.
 enemyTurn :- nl, checkDefeat, !.
 enemyTurn :-
-	nl, write('Enemy\'s turn...'), nl,
+	write('Enemy\'s turn...'), nl,
 	random(0,4,X),
 	enemyAttack(X),
 	activeToke(Nick, OurSkillStts),
@@ -97,6 +97,7 @@ enemyTurn :-
 	getType(Nick, OurType),
 	enemyToke(Enemy,EnemyHP,EnemyType,_,_,_,_,_,EnemySkillStts),
 
+	nl, nl,
 	write('Your toke:'), nl,
 	showBattleStats(Nick, OurHP, OurType, OurSkillStts), nl,
 

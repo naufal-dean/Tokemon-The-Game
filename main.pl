@@ -40,6 +40,7 @@ start :-
     randomize,
     welcomeMsg,
     initPlayer,
+    initToke,
     generateMap,
     help, nl,
     map, nl,

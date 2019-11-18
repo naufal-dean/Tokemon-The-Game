@@ -3,11 +3,11 @@
 % tokeData(Name,Hp,Type,Att,Skill,SkillDmg,Exp,Level))
 /* Legendary */
 tokeData(_,_,_,_,_,_,_,_) :- checkStart, !.
-tokeData(jojomon,100,leaves,20,'leaf typhoon',40,0,5).
-tokeData(annamon,120,water,17,'tsunami',35,0,5).
-tokeData(deanmon,85,fire,23,'fire breath',45,0,5).
-tokeData(hadimon,95,dark,17,'black hole',60,0,5).
-tokeData(doraemon,93,light,18,'kantong ajaib',50,0,5).
+tokeData(jojomon,100,leaves,20,'leaf typhoon',40,15,5).
+tokeData(annamon,120,water,17,'tsunami',35,15,5).
+tokeData(deanmon,85,fire,23,'fire breath',45,15,5).
+tokeData(hadimon,95,dark,17,'black hole',60,15,5).
+tokeData(doraemon,93,light,18,'kantong ajaib',50,15,5).
 % tokeData(kindermon,90,neutral,19,'chocho egg',55,0,5).
 % tokeData(ekomon,110,leaves,21,'green shoot',30,0,5).
 % tokeData(coremon,94,light,18,'core bang',52,0,5).

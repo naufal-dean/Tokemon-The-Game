@@ -52,6 +52,7 @@ moveTo(RDest, CDest) :-
 	invalidMoveMsg,
 	!.
 moveTo(RDest, CDest) :-
+	map,
 	retract(at(player, R, C)),
 	((
 		at(Terrain1, R, C),
@@ -68,7 +69,6 @@ moveTo(RDest, CDest) :-
 	retract(moves(MoveCnt)),
 	MoveCntPlus is MoveCnt+1,
 	asserta(moves(MoveCntPlus)),
-	map,
 	calcChance(Chance),
 	triggerEnemy(Chance).
 

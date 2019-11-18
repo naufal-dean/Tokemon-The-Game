@@ -68,6 +68,24 @@ enemyTurn :-
 	nl, write('Enemy\'s turn...'), nl,
 	random(0,4,X),
 	enemyAttack(X),
+	activeToke(Nick, OurSkillStts),
+	getHP(Nick, OurHP),
+	getType(Nick, OurType),
+	enemyToke(Enemy,EnemyHP,EnemyType,_,_,_,_,_,EnemySkillStts),
+
+	write('Your toke:'), nl,
+	showBattleStats(Nick, OurHP, OurType, OurSkillStts), nl,
+	
+	write('Enemy toke:'), nl,
+	showBattleStats(Enemy, EnemyHP, EnemyType, EnemySkillStts),
+	!.
+
+showBattleStats(_,_,_,_) :- checkStart, !.
+showBattleStats(Nick, HP, Type, SkillStts) :-
+	write(Nick), nl,
+	write('Health: '), write(HP), nl,
+	write('Type: '), write(Type), nl,
+	write('Special Attack avalable? '), write(SkillStts), nl,
 	!.
 
 enemyAttack(_) :- checkStart, !.
@@ -137,7 +155,8 @@ isTokeLost(Toke) :-
 	format('Noo! ~a has defeated...', [Toke]), nl,
 	( \+ countToke(0) -> (
 			write('You must pick another Tokemon!'), nl
-		)
+		) ;
+		lose
 	).
 isTokeLost(_).
 

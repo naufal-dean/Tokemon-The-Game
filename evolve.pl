@@ -94,7 +94,7 @@ evolve(X) :- checkInvalidInput(X), !.
 evolve(Nick) :-
   getLevel(Nick,Level),
   Level < 5,
-  format('~a is not ready to be evolved yet...', [Nick]),
+  format('~a is not ready to be evolved yet...', [Nick]), nl,
   !.
 evolve(Nick) :-
   retract(tokemon(Nick,Name,_,_,_,_,_,_,_)),
@@ -102,4 +102,7 @@ evolve(Nick) :-
   asserta(tokemon(Nick,EvoName,EvoHP,EvoType,EvoAtt,EvoSkill,EvoSkillDmg,EvoExp,EvoLevel)),
   write('What... The evolution is coming...'), nl,
   format('~a is evolved into ~a', [Nick,EvoName]), nl,
+  !.
+evolve(_) :-
+  noTokemonMsg,
   !.

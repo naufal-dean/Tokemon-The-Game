@@ -8,7 +8,9 @@ showInven([]) :-
 showInven([Nick|T]) :-
 	getHP(Nick, HP),
 	getType(Nick, Type),
-	format('~w\nHealth: ~w\nType: ~w\n\n', [Nick, HP, Type]),
+	getExp(Nick, Exp),
+	getLevel(Nick, Level),
+	format('~w\nHealth: ~w\nType: ~w\nExp: ~w\\15\nLevel: ~w\n\n', [Nick, HP, Type, Exp, Level]),
 	showInven(T).
 
 insertInven([], Y, [Y]) :- !.

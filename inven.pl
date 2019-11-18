@@ -8,9 +8,18 @@ showInven([]) :-
 showInven([Nick|T]) :-
 	getHP(Nick, HP),
 	getType(Nick, Type),
+	getLevel(Nick, Level),
+	Level == 5,
+	format('~w\nHealth: ~w\nType: ~w\nExp: Max\nLevel: ~w\n\n', [Nick, HP, Type, Level]),
+	showInven(T),
+	!.
+showInven([Nick|T]) :-
+	getHP(Nick, HP),
+	getType(Nick, Type),
 	getExp(Nick, Exp),
 	getLevel(Nick, Level),
-	format('~w\nHealth: ~w\nType: ~w\nExp: ~w\\15\nLevel: ~w\n\n', [Nick, HP, Type, Exp, Level]),
+	expLimit(Level, ExpLimit),
+	format('~w\nHealth: ~w\nType: ~w\nExp: ~w/~w\nLevel: ~w\n\n', [Nick, HP, Type, Exp, ExpLimit, Level]),
 	showInven(T).
 
 insertInven([], Y, [Y]) :- !.
